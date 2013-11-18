@@ -1,7 +1,7 @@
 
 ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="robbyrussell"
+ZSH_THEME="jedcn"
 
 DISABLE_CORRECTION="true"
 
@@ -79,6 +79,12 @@ alias gdom='git diff origin/master'
 alias gpodd='git push origin development:development'
 alias gpoii='git push origin integration:integration'
 alias gpomm='git push origin master:master'
+
+function current_branch() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || \
+  ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+  echo ${ref#refs/heads/}
+}
 
 function serve {
   port="${1:-3000}"

@@ -16,7 +16,7 @@
    I'm using the default theme for now:
 
 #+BEGIN_SRC sh :tangle ../real/.zshrc
-  ZSH_THEME="robbyrussell"
+  ZSH_THEME="jedcn"
 #+END_SRC
 
    I then disabled auto correction, because it drives me crazy and
@@ -144,6 +144,17 @@
   alias gpodd='git push origin development:development'
   alias gpoii='git push origin integration:integration'
   alias gpomm='git push origin master:master'
+#+END_SRC
+
+    I took this straight up from [[https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh#L108][the git plugin]]. The function defined
+    here is required for the jedcn theme to function.
+
+#+BEGIN_SRC sh :tangle ../real/.zshrc
+  function current_branch() {
+    ref=$(git symbolic-ref HEAD 2> /dev/null) || \
+    ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+    echo ${ref#refs/heads/}
+  }
 #+END_SRC
 
 ** Functions
