@@ -1,20 +1,210 @@
 * ZSH and Oh My ZSH!
 
-  One day, I started cleaning up my zsh. I began with [[https://github.com/robbyrussell/oh-my-zsh/blob/9d2b5c841e251840d7965163f4eb9797bc0db49f/templates/zshrc.zsh-template][here]].
+  One day, I started cleaning up my zsh. I began with the starter
+  [[https://github.com/robbyrussell/oh-my-zsh/blob/9d2b5c841e251840d7965163f4eb9797bc0db49f/templates/zshrc.zsh-template][.zshrc template]]. I removed comments, and the began to focus on just
+  what I needed.
+
+** Basic Setup
+
+   This needs to be the path to my oh-my-zsh configuration. It's magic
+   to me:
 
 #+BEGIN_SRC sh :tangle ../real/.zshrc
-  # Path to your oh-my-zsh configuration.
   ZSH=$HOME/.oh-my-zsh
+#+END_SRC
 
-  # Set name of the theme to load.
+   I'm using the default theme for now:
+
+#+BEGIN_SRC sh :tangle ../real/.zshrc
   ZSH_THEME="robbyrussell"
+#+END_SRC
 
-  # Disable command autocorrection
+   I then disabled auto correction, because it drives me crazy and
+   seems like a generally bad idea.
+
+#+BEGIN_SRC sh :tangle ../real/.zshrc
   DISABLE_CORRECTION="true"
+#+END_SRC
 
+   And I don't load any plugins:
+
+#+BEGIN_SRC sh :tangle ../real/.zshrc
   # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
   # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
   plugins=()
+#+END_SRC
 
+   Next, we get the core of oh-my-zsh running:
+
+#+BEGIN_SRC sh :tangle ../real/.zshrc
   source $ZSH/oh-my-zsh.sh
+#+END_SRC
+
+   And then we customize.
+
+** Aliases
+
+*** r
+
+   I run rake all the time. Let's call it =r=.
+
+#+BEGIN_SRC sh :tangle ../real/.zshrc
+  alias r='rake'
+#+END_SRC
+
+   This makes it so that pressing =c= gives me a syntax highlighted
+   =cat=. I first learned of it from [[https://twitter.com/paul_irish/status/257310654631919616][Paul Irish]].
+
+   To get it working, you need to have Python and you need to have
+   easy_install which, in turn, is used to install Pygments. On MacOS,
+   I ran =sudo easy_install Pygments= without any trouble.
+
+*** c
+
+#+BEGIN_SRC sh :tangle ../real/.zshrc
+  alias c='pygmentize -O style=monokai -f console256 -g'
+#+END_SRC
+
+*** Vagrant
+
+    These aliases are meant to reduce common vagrant commands to two
+    characters.
+
+#+BEGIN_SRC sh :tangle ../real/.zshrc
+  alias v='vagrant'
+  alias vu='vagrant up'
+  alias vs='vagrant ssh'
+  alias vd='vagrant destroy'
+  alias vp='vagrant provision'
+  alias vh='vagrant halt'
+#+END_SRC
+
+*** Git
+
+    Many of these aliases are provided by the "git" plugin, but I'm
+    inclined to start smaller and build up gradually with things I
+    understand. Therefore, I don't use the "git" plugin and instead
+    use these.
+
+#+BEGIN_SRC sh :tangle ../real/.zshrc
+  #
+  # git diff..
+  alias gd='git diff'
+  alias gdc='git diff --cached'
+
+  #
+  # git status..
+  alias gs='git status --short'
+
+  #
+  # git fetch..
+  alias gf='git fetch'
+  alias gfo='git fetch origin'
+  alias gfa='git fetch --all'
+
+  #
+  alias glog='git log --date-order --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset"'
+  alias gl='glog --graph'
+
+  #
+  # git merge
+  alias gm='git merge --no-ff --log'
+  alias gmnofflog='git merge --no-ff --log'
+
+  #
+  # git mv
+  alias gmv='git mv'
+
+  #
+  # git rm
+  alias grm='git rm'
+
+  #
+  # git reset..
+  alias grod='git reset --hard origin/development'
+  alias grom='git reset --hard origin/master'
+  alias groi='git reset --hard origin/integration'
+  alias gror='git reset --hard origin/release'
+
+  #
+  # git checkout..
+  alias gcod='git checkout development'
+  alias gcoi='git checkout integration'
+  alias gcom='git checkout master'
+  alias gcor='git checkout release'
+
+  #
+  # git diff..
+  alias gdoi='git diff origin/integration'
+  alias gdod='git diff origin/development'
+  alias gdom='git diff origin/master'
+
+  #
+  # git push..
+  alias gpodd='git push origin development:development'
+  alias gpoii='git push origin integration:integration'
+  alias gpomm='git push origin master:master'
+#+END_SRC
+
+** Functions
+
+   I like to be able to type =serve= and have a webserver start
+   serving up the contents from wherever I typed =serve=. This
+   accomplishes that. It comes from a [[http://stackoverflow.com/questions/3108395/serve-current-directory-from-command-line][Stack Overflow]] entry.
+
+   You can type =serve= and you'll see the pwd displayed at
+   http://localhost:3000, or you can type =serve <port_number>= and
+   see the pwd displayed on port_number.
+
+#+BEGIN_SRC sh :tangle ../real/.zshrc
+  function serve {
+    port="${1:-3000}"
+    ruby -r webrick -e "s = WEBrick::HTTPServer.new(:Port => $port, :DocumentRoot => Dir.pwd); trap('INT') { s.shutdown }; s.start"
+  }
+#+END_SRC
+
+** Misc
+
+*** RVM
+
+  I use RVM to manage my Rubies. At the end of the RVM install, we're
+  told to setup our ZSH with the following:
+
+#+BEGIN_SRC sh :tangle ../real/.zshrc
+  # RVM
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+#+END_SRC
+
+*** Java
+
+    I use the Java that comes with my MacOS. I need this setting for
+    a set of internal tools.
+
+#+BEGIN_SRC sh :tangle ../real/.zshrc
+  export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
+#+END_SRC
+
+*** Path
+
+    My =PATH= settings are mainly based on:
+
+    + including stuff that brew gives me (/usr/local/bin)
+    + including stuff that a MacTeX install gives me (/usr/texbin)
+    + including stuff that rvm gives me.
+    + including stuff that a local project of mine, mrsi, gives me.
+    + including stuff that npm gives me.
+
+#+BEGIN_SRC sh :tangle ../real/.zshrc
+  export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
+  export PATH=$PATH:/Users/jnorthridge/.rvm/bin:/Users/jnorthridge/c/mrsi/bin
+  export PATH=$PATH:/usr/local/share/npm/bin
+#+END_SRC
+
+*** z
+
+    I use [[https://github.com/rupa/z][z]] to jump around. It watches what you do, learns, and then
+    lets you fuzzy jump.
+
+#+BEGIN_SRC sh :tangle ../real/.zshrc
+  . `brew --prefix`/etc/profile.d/z.sh
 #+END_SRC
