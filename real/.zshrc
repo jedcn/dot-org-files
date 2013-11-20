@@ -22,6 +22,9 @@ alias vd='vagrant destroy'
 alias vp='vagrant provision'
 alias vh='vagrant halt'
 
+alias gc='git commit'
+alias ga='git add'
+
 #
 # git diff..
 alias gd='git diff'
@@ -63,6 +66,7 @@ alias gror='git reset --hard origin/release'
 
 #
 # git checkout..
+alias gco='git checkout'
 alias gcod='git checkout development'
 alias gcoi='git checkout integration'
 alias gcom='git checkout master'
