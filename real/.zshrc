@@ -24,6 +24,7 @@ alias vh='vagrant halt'
 
 alias gc='git commit'
 alias ga='git add'
+alias gb='git branch'
 
 #
 # git diff..
