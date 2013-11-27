@@ -1,17 +1,13 @@
-# dot-org-files
+# Literately programmed dot files
 
-```
-  bin/
-    reify.sh # copies over all contents of org/ to real/. Tangles any .org file.
-    link.sh  # Creates static links from real/* to *. So, .zshrc -> real/.zshrc
+Program in emacs and org-mode with babel underneath `org/`.
 
-  org/
-    zshrc.org
-    .oh-my-zsh/
-      custom/
+Emacs can weave `org/` contents and place results in `doc/`.
 
-  real/
-    .zshrc
-    .oh-my-zsh/
-      custom/
-```
+Emacs can tangle `org/` contents and place results in `home/`.
+
+Homeshick links files underneath `home/` together.
+
+Homeshick can overlay multiple "castles," so this castle could
+contribute a ".zshrc" and different repository could contribute the
+core of "oh-my-zsh."
