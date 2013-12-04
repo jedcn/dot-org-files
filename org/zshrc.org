@@ -9,26 +9,26 @@
    This needs to be the path to my oh-my-zsh configuration. It's magic
    to me:
 
-#+BEGIN_SRC sh :tangle real/.zshrc
+#+BEGIN_SRC sh :tangle ../home/.zshrc
   ZSH=$HOME/.oh-my-zsh
 #+END_SRC
 
    I'm using the default theme for now:
 
-#+BEGIN_SRC sh :tangle real/.zshrc
+#+BEGIN_SRC sh :tangle ../home/.zshrc
   ZSH_THEME="jedcn"
 #+END_SRC
 
    I then disabled auto correction, because it drives me crazy and
    seems like a generally bad idea.
 
-#+BEGIN_SRC sh :tangle real/.zshrc
+#+BEGIN_SRC sh :tangle ../home/.zshrc
   DISABLE_CORRECTION="true"
 #+END_SRC
 
    And I don't load any plugins:
 
-#+BEGIN_SRC sh :tangle real/.zshrc
+#+BEGIN_SRC sh :tangle ../home/.zshrc
   # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
   # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
   plugins=()
@@ -36,7 +36,7 @@
 
    Next, we get the core of oh-my-zsh running:
 
-#+BEGIN_SRC sh :tangle real/.zshrc
+#+BEGIN_SRC sh :tangle ../home/.zshrc
   source $ZSH/oh-my-zsh.sh
 #+END_SRC
 
@@ -48,7 +48,7 @@
 
    I run rake all the time. Let's call it =r=.
 
-#+BEGIN_SRC sh :tangle real/.zshrc
+#+BEGIN_SRC sh :tangle ../home/.zshrc
   alias r='rake'
 #+END_SRC
 
@@ -61,7 +61,7 @@
 
 *** c
 
-#+BEGIN_SRC sh :tangle real/.zshrc
+#+BEGIN_SRC sh :tangle ../home/.zshrc
   alias c='pygmentize -O style=monokai -f console256 -g'
 #+END_SRC
 
@@ -70,7 +70,7 @@
     These aliases are meant to reduce common vagrant commands to two
     characters.
 
-#+BEGIN_SRC sh :tangle real/.zshrc
+#+BEGIN_SRC sh :tangle ../home/.zshrc
   alias v='vagrant'
   alias vu='vagrant up'
   alias vs='vagrant ssh'
@@ -86,7 +86,7 @@
     understand. Therefore, I don't use the "git" plugin and instead
     use these.
 
-#+BEGIN_SRC sh :tangle real/.zshrc
+#+BEGIN_SRC sh :tangle ../home/.zshrc
 
   alias gc='git commit'
   alias ga='git add'
@@ -147,6 +147,7 @@
 
   #
   # git push..
+  alias gp='git push'
   alias gpodd='git push origin development:development'
   alias gpoii='git push origin integration:integration'
   alias gpomm='git push origin master:master'
@@ -155,7 +156,7 @@
     I took this straight up from [[https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh#L108][the git plugin]]. The function defined
     here is required for the jedcn theme to function.
 
-#+BEGIN_SRC sh :tangle real/.zshrc
+#+BEGIN_SRC sh :tangle ../home/.zshrc
   function current_branch() {
     ref=$(git symbolic-ref HEAD 2> /dev/null) || \
     ref=$(git rev-parse --short HEAD 2> /dev/null) || return
@@ -173,7 +174,7 @@
    http://localhost:3000, or you can type =serve <port_number>= and
    see the pwd displayed on port_number.
 
-#+BEGIN_SRC sh :tangle real/.zshrc
+#+BEGIN_SRC sh :tangle ../home/.zshrc
   function serve {
     port="${1:-3000}"
     ruby -r webrick -e "s = WEBrick::HTTPServer.new(:Port => $port, :DocumentRoot => Dir.pwd); trap('INT') { s.shutdown }; s.start"
@@ -187,7 +188,7 @@
   I use RVM to manage my Rubies. At the end of the RVM install, we're
   told to setup our ZSH with the following:
 
-#+BEGIN_SRC sh :tangle real/.zshrc
+#+BEGIN_SRC sh :tangle ../home/.zshrc
   # RVM
   [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 #+END_SRC
@@ -197,7 +198,7 @@
     I use the Java that comes with my MacOS. I need this setting for
     a set of internal tools.
 
-#+BEGIN_SRC sh :tangle real/.zshrc
+#+BEGIN_SRC sh :tangle ../home/.zshrc
   export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 #+END_SRC
 
@@ -211,7 +212,7 @@
     + including stuff that a local project of mine, mrsi, gives me.
     + including stuff that npm gives me.
 
-#+BEGIN_SRC sh :tangle real/.zshrc
+#+BEGIN_SRC sh :tangle ../home/.zshrc
   export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
   export PATH=$PATH:/Users/jnorthridge/.rvm/bin:/Users/jnorthridge/c/mrsi/bin
   export PATH=$PATH:/usr/local/share/npm/bin
@@ -222,6 +223,6 @@
     I use [[https://github.com/rupa/z][z]] to jump around. It watches what you do, learns, and then
     lets you fuzzy jump.
 
-#+BEGIN_SRC sh :tangle real/.zshrc
+#+BEGIN_SRC sh :tangle ../home/.zshrc
   . `brew --prefix`/etc/profile.d/z.sh
 #+END_SRC

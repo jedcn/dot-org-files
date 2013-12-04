@@ -81,6 +81,7 @@ alias gdom='git diff origin/master'
 
 #
 # git push..
+alias gp='git push'
 alias gpodd='git push origin development:development'
 alias gpoii='git push origin integration:integration'
 alias gpomm='git push origin master:master'
