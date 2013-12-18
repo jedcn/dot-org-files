@@ -223,6 +223,12 @@
     I use [[https://github.com/rupa/z][z]] to jump around. It watches what you do, learns, and then
     lets you fuzzy jump.
 
+    Presently, I'm getting "z" from brew, and so I only run the setup
+    command below if brew is installed.
+
 #+BEGIN_SRC sh :tangle ../home/.zshrc
-  . `brew --prefix`/etc/profile.d/z.sh
+  brew=$(which brew)
+  if [ -x "$brew" ] ; then
+    . `brew --prefix`/etc/profile.d/z.sh
+  fi
 #+END_SRC

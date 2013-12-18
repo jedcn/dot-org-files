@@ -106,4 +106,7 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
 export PATH=$PATH:/Users/jnorthridge/.rvm/bin:/Users/jnorthridge/c/mrsi/bin
 export PATH=$PATH:/usr/local/share/npm/bin
 
-. `brew --prefix`/etc/profile.d/z.sh
+brew=$(which brew)
+if [ -x "$brew" ] ; then
+  . `brew --prefix`/etc/profile.d/z.sh
+fi
