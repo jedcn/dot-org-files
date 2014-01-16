@@ -92,9 +92,15 @@ function current_branch() {
   echo ${ref#refs/heads/}
 }
 
+alias mci='mvn clean install'
+
 function serve {
   port="${1:-3000}"
   ruby -r webrick -e "s = WEBrick::HTTPServer.new(:Port => $port, :DocumentRoot => Dir.pwd); trap('INT') { s.shutdown }; s.start"
+}
+
+ghroving-remote-add() {
+  git remote add $1 https://github.roving.com/$1/$2.git
 }
 
 # RVM

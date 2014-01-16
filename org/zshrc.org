@@ -81,7 +81,7 @@
 
 *** Git
 
-    Many of these aliases are provided by the "git" plugin, but I'm
+    Many of these aliases are provided by ZSH's "git" plugin, but I'm
     inclined to start smaller and build up gradually with things I
     understand. Therefore, I don't use the "git" plugin and instead
     use these.
@@ -164,6 +164,12 @@
   }
 #+END_SRC
 
+*** Maven
+
+#+BEGIN_SRC sh :tangle ../home/.zshrc
+  alias mci='mvn clean install'
+#+END_SRC
+
 ** Functions
 
    I like to be able to type =serve= and have a webserver start
@@ -181,6 +187,13 @@
   }
 #+END_SRC
 
+   I often add remotes for my Github Enterprise.
+
+#+BEGIN_SRC sh :tangle ../home/.zshrc
+  ghroving-remote-add() {
+    git remote add $1 https://github.roving.com/$1/$2.git
+  }
+#+END_SRC
 ** Misc
 
 *** RVM
