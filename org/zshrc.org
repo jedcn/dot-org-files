@@ -207,6 +207,10 @@
   [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 #+END_SRC
 
+#+BEGIN_SRC sh :tangle ../home/.zshrc
+  alias rvmc='rvm current'
+#+END_SRC
+
 *** Java
 
     I use the Java that comes with my MacOS. I need this setting for

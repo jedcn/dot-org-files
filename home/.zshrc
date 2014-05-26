@@ -107,6 +107,8 @@ ghroving-remote-add() {
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
+alias rvmc='rvm current'
+
 export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 
 if [ -d /Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home ];
