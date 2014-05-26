@@ -23,6 +23,7 @@ alias vp='vagrant provision'
 alias vh='vagrant halt'
 
 alias gc='git commit'
+alias gca='git commit --amend'
 alias ga='git add'
 alias gb='git branch'
 

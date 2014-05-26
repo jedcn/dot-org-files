@@ -89,6 +89,7 @@
 #+BEGIN_SRC sh :tangle ../home/.zshrc
 
   alias gc='git commit'
+  alias gca='git commit --amend'
   alias ga='git add'
   alias gb='git branch'
 
