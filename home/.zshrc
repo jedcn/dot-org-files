@@ -109,6 +109,11 @@ ghroving-remote-add() {
 
 export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 
+if [ -d /Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home ];
+then
+  export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home
+fi
+
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
 export PATH=$PATH:/Users/jnorthridge/.rvm/bin:/Users/jnorthridge/c/mrsi/bin
 export PATH=$PATH:/usr/local/share/npm/bin
