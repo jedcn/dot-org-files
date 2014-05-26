@@ -22,10 +22,15 @@ alias vd='vagrant destroy'
 alias vp='vagrant provision'
 alias vh='vagrant halt'
 
-alias gc='git commit'
-alias gca='git commit --amend'
+#
+# git misc..
 alias ga='git add'
 alias gb='git branch'
+
+#
+# git commit..
+alias gc='git commit'
+alias gca='git commit --amend'
 
 #
 # git diff..

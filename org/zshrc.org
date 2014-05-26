@@ -92,11 +92,15 @@
     use these.
 
 #+BEGIN_SRC sh :tangle ../home/.zshrc
-
-  alias gc='git commit'
-  alias gca='git commit --amend'
+  #
+  # git misc..
   alias ga='git add'
   alias gb='git branch'
+
+  #
+  # git commit..
+  alias gc='git commit'
+  alias gca='git commit --amend'
 
   #
   # git diff..
@@ -179,8 +183,8 @@
 ** Functions
 
    I like to be able to type =serve= and have a webserver start
-   serving up the contents from wherever I typed =serve=. This
-   accomplishes that. It comes from a [[http://stackoverflow.com/questions/3108395/serve-current-directory-from-command-line][Stack Overflow]] entry.
+   serving up the contents from wherever I typed =serve=. It comes
+   from a [[http://stackoverflow.com/questions/3108395/serve-current-directory-from-command-line][Stack Overflow]] entry.
 
    You can type =serve= and you'll see the pwd displayed at
    http://localhost:3000, or you can type =serve <port_number>= and
@@ -193,7 +197,8 @@
   }
 #+END_SRC
 
-   I often add remotes for my Github Enterprise.
+   I often add remotes for my Github Enterprise (company name is
+   roving.com).
 
 #+BEGIN_SRC sh :tangle ../home/.zshrc
   ghroving-remote-add() {
