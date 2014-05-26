@@ -13,7 +13,7 @@
   ZSH=$HOME/.oh-my-zsh
 #+END_SRC
 
-   I'm using the default theme for now:
+   I'm using a custom theme that I created:
 
 #+BEGIN_SRC sh :tangle ../home/.zshrc
   ZSH_THEME="jedcn"
