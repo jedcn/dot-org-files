@@ -44,6 +44,11 @@
 
 ** Aliases
 
+   I call out aliases in multiple places. This section contains stuff
+   that otherwise wouldn't have a home.
+
+   Some things, like aliases for rvm, are down in the RVM section.
+
 *** r
 
    I run rake all the time. Let's call it =r=.
