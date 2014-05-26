@@ -270,3 +270,20 @@
     . `brew --prefix`/etc/profile.d/z.sh
   fi
 #+END_SRC
+
+*** homeshick
+
+    I use [[https://github.com/andsens/homeshick][homeshick]] to manage my dot files. From the homeshick point
+    of view, any git repository with a "home" directory can contain
+    dot-files.
+
+    The following comes from the homeshick introduction, and it makes
+    it so that I can easily access any homeshick command, such as
+    =homeshick pull=.
+
+#+BEGIN_SRC sh :tangle ../home/.zshrc
+  if [ -d "$HOME/.homesick/repos/homeshick" ];
+  then
+    source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+  fi
+#+END_SRC

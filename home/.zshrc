@@ -129,3 +129,8 @@ brew=$(which brew)
 if [ -x "$brew" ] ; then
   . `brew --prefix`/etc/profile.d/z.sh
 fi
+
+if [ -d "$HOME/.homesick/repos/homeshick" ];
+then
+  source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+fi
