@@ -19,7 +19,7 @@ This project tracks [dot-files][github-dot-files] written in
 
 To be useful to a computer, the configuration files need to be
 separated from prose descriptions. This is achieved using
-[GNU Make][make].
+[GNU Make][make] and `emacs` in batch mode.
 
 ## Homeshick?
 
@@ -27,8 +27,8 @@ Once separated, the resulting dot-files land in a directory named
 `home/`, and this qualifies them to be a [homeshick][homeshick]
 Castle.
 
-In a sentence, this means that dot-files are backed up online and
-their contents are easily synchronized between computers.
+This means that dot-files are backed up online and their contents are
+easily synchronized between computers.
 
 ## Motivation
 
@@ -43,7 +43,7 @@ explanation for anything you've added.
 
 ## How to?
 
-Use emacs to edit the .org files. Run =make= to translate to pure
+Use emacs to edit the .org files. Run `make` to translate to pure
 dot-files underneath `home/`. Commit both simultaneously.
 
 Create new .org files. Update the makefile accordingly.
