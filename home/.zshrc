@@ -13,6 +13,10 @@ source $ZSH/oh-my-zsh.sh
 
 alias r='rake'
 
+alias b='bundle'
+alias be='bundle exec'
+alias bec='bundle exec cucumber'
+
 alias c='pygmentize -O style=monokai -f console256 -g'
 
 alias v='vagrant'

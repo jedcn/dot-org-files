@@ -51,20 +51,31 @@
 
 *** r
 
-   I run rake all the time. Let's call it =r=.
+    I run rake all the time. Let's call it =r=.
 
 #+BEGIN_SRC sh :tangle ../home/.zshrc
   alias r='rake'
 #+END_SRC
 
-   This makes it so that pressing =c= gives me a syntax highlighted
-   =cat=. I first learned of it from [[https://twitter.com/paul_irish/status/257310654631919616][Paul Irish]].
+*** b, be, bec
 
-   To get it working, you need to have Python and you need to have
-   easy_install which, in turn, is used to install Pygments. On MacOS,
-   I ran =sudo easy_install Pygments= without any trouble.
+    I run =bundle= and =bundle exec= and =bundle exec cucumber= all the
+    time. Let's call them =b=, =be=, and =bec=.
+
+#+BEGIN_SRC sh :tangle ../home/.zshrc
+  alias b='bundle'
+  alias be='bundle exec'
+  alias bec='bundle exec cucumber'
+#+END_SRC
 
 *** c
+
+    This makes it so that pressing =c= gives me a syntax highlighted
+    =cat=. I first learned of it from [[https://twitter.com/paul_irish/status/257310654631919616][Paul Irish]].
+
+    To get it working, you need to have Python and you need to have
+    easy_install which, in turn, is used to install Pygments. On MacOS,
+    I ran =sudo easy_install Pygments= without any trouble.
 
 #+BEGIN_SRC sh :tangle ../home/.zshrc
   alias c='pygmentize -O style=monokai -f console256 -g'
