@@ -35,6 +35,10 @@ alias gb='git branch'
 # git commit..
 alias gc='git commit'
 alias gca='git commit --amend'
+function gcm() {
+  CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+  git commit -m "[${CURRENT_BRANCH}] $1"
+}
 
 #
 # git diff..
@@ -70,6 +74,7 @@ alias grm='git rm'
 
 #
 # git reset..
+alias gr='git reset'
 alias grod='git reset --hard origin/development'
 alias grom='git reset --hard origin/master'
 alias groi='git reset --hard origin/integration'
