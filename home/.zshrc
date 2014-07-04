@@ -123,6 +123,12 @@ ghroving-remote-add() {
 
 alias rvmc='rvm current'
 
+function rvmi() {
+  PROJECT_NAME=$(basename `pwd`)
+  echo ${PROJECT_NAME} > .ruby-gemset
+  echo "2.1.0" > .ruby-version
+}
+
 export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 
 if [ -d /Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home ];
