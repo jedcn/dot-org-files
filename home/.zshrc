@@ -137,7 +137,7 @@ then
 fi
 
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
-export PATH=$PATH:/Users/jnorthridge/.rvm/bin:/Users/jnorthridge/c/mrsi/bin
+export PATH=$PATH:/Users/jnorthridge/.rvm/bin:/Users/jnorthridge/c/misc/mrsi/bin
 export PATH=$PATH:/usr/local/share/npm/bin
 
 brew=$(which brew)
