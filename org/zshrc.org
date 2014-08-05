@@ -81,6 +81,21 @@
   alias c='pygmentize -O style=monokai -f console256 -g'
 #+END_SRC
 
+*** cl, cless
+
+    If we combine the =c= from above with the notion of only looking
+    at a page of text at a time, we get the idea combining c and
+    less. We'll call it "cless" or "cl" for short.
+
+#+BEGIN_SRC sh :tangle ../home/.zshrc
+  function cless () {
+    colorized=$(c $1)
+    echo $colorized | less
+  }
+
+  alias cl=cless
+#+END_SRC
+
 *** Vagrant
 
     These aliases are meant to reduce common vagrant commands to two
