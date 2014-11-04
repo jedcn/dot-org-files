@@ -17,7 +17,7 @@ alias b='bundle'
 alias be='bundle exec'
 alias bec='bundle exec cucumber'
 
-alias c='pygmentize -O style=monokai -f console256 -g'
+alias c='pygmentize -O style=autumn -f console256 -g'
 
 function cless () {
   colorized=$(c $1)
