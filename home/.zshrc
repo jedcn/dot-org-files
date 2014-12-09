@@ -160,3 +160,8 @@ fi
 function sync_dot_files() {
   homeshick pull
 }
+
+if [ -f "/opt/boxen/env.sh" ];
+then
+  source /opt/boxen/env.sh
+fi

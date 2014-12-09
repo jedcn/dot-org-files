@@ -342,3 +342,17 @@
     homeshick pull
   }
 #+END_SRC
+** Boxen
+
+   Startup Boxen if it's present. Among other things-- this:
+
+   + Sets up node shims
+   + Sets up rbenv shims
+   + Lets you type "boxen" and it refreshes the machine.
+
+#+BEGIN_SRC sh :tangle ../home/.zshrc
+  if [ -f "/opt/boxen/env.sh" ];
+  then
+    source /opt/boxen/env.sh
+  fi
+#+END_SRC
