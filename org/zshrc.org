@@ -313,12 +313,20 @@
     lets you fuzzy jump.
 
     Presently, I'm getting "z" from brew, and so I only run the setup
-    command below if brew is installed.
+    command below if brew is installed or if I find it where boxen
+    puts it.
 
 #+BEGIN_SRC sh :tangle ../home/.zshrc
   brew=$(which brew)
-  if [ -x "$brew" ] ; then
+  if [ -x "$brew" ];
+  then
     . `brew --prefix`/etc/profile.d/z.sh
+  fi
+
+  if [ -d "/opt/init-src/z" ];
+  then
+    echo "Sourcing z.sh"
+    . /opt/init-src/z/z.sh
   fi
 #+END_SRC
 
