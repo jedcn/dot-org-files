@@ -1,4 +1,7 @@
-all : home/.zshrc home/.vimrc home/.vimrc.bundles home/.oh-my-zsh/custom/jedcn.zsh-theme
+all : home/.slate home/.zshrc home/.vimrc home/.vimrc.bundles home/.oh-my-zsh/custom/jedcn.zsh-theme
+
+home/.slate : org/slate.org
+		./tangle-file.sh org/slate.org
 
 home/.zshrc : org/zshrc.org
 		./tangle-file.sh org/zshrc.org
