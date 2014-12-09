@@ -1,7 +1,7 @@
 
 ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="jedcn"
+ZSH_THEME="sorin"
 
 DISABLE_CORRECTION="true"
 
