@@ -40,9 +40,10 @@ alias gfa='git fetch --all'
 
 alias gm='git merge --no-ff --log'
 
-alias grom='git reset --hard origin/master'
 alias gcom='git checkout master'
+alias gdom='git diff origin/master'
 alias gpom='git push origin master'
+alias grom='git reset --hard origin/master'
 
 alias gs='git status --short'
 alias gmv='git mv'

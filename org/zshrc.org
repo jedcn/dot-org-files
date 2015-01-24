@@ -156,15 +156,16 @@
        alias gm='git merge --no-ff --log'
      #+END_SRC
 
-**** gcom, grom, gpom
+**** gcom, gdom, gpom, grom
 
      We do so much work around master, it makes sense to have a series
-     of functions that orient around it:
+     of functions that orient toward it:
 
      #+BEGIN_SRC sh :tangle ../home/.zshrc
-       alias grom='git reset --hard origin/master'
        alias gcom='git checkout master'
+       alias gdom='git diff origin/master'
        alias gpom='git push origin master'
+       alias grom='git reset --hard origin/master'
      #+END_SRC
 
 **** All the Rest
