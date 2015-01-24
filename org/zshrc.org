@@ -219,11 +219,21 @@
 
 ** Misc
 
+*** RBENV
+
+    I have started using [[https://github.com/sstephenson/rbenv][rbenv]] to manage my rubies. My projects have a
+    =.ruby-version= which informs rbenv, and I also use an environment
+    variable to declare the default ruby if I'm not in a project:
+
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      export RBENV_VERSION=2.1.2
+    #+END_SRC
+
 *** RVM
 
-    I sometimes use RVM to manage my Rubies. At the end of the RVM
-    install, we're told to setup our ZSH with the following (it does no
-    harm if rvm isn't present):
+    I sometimes still use RVM to manage my Rubies. At the end of the
+    RVM install, we're told to setup our ZSH with the following (it
+    does no harm if rvm isn't present):
 
     #+BEGIN_SRC sh :tangle ../home/.zshrc
       # RVM
@@ -252,6 +262,17 @@
         echo ${PROJECT_NAME} > .ruby-gemset
         echo "2.1.0" > .ruby-version
       }
+    #+END_SRC
+
+*** NodeEnv
+
+    I have started using nodenv to manage my nodes. Just like rbenv,
+    my projects call out which version of node they'd like via a
+    =.node-version= file, but I also supply a default via an
+    environment variable:
+
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      export NODENV_VERSION=v0.10
     #+END_SRC
 
 *** Java

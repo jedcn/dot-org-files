@@ -62,6 +62,8 @@ ghroving-remote-add() {
   git remote add $1 https://github.roving.com/$1/$2.git
 }
 
+export RBENV_VERSION=2.1.2
+
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
@@ -72,6 +74,8 @@ function rvmi() {
   echo ${PROJECT_NAME} > .ruby-gemset
   echo "2.1.0" > .ruby-version
 }
+
+export NODENV_VERSION=v0.10
 
 export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 
