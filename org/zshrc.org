@@ -9,36 +9,36 @@
    This needs to be the path to my oh-my-zsh configuration. It's magic
    to me:
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  ZSH=$HOME/.oh-my-zsh
-#+END_SRC
+   #+BEGIN_SRC sh :tangle ../home/.zshrc
+     ZSH=$HOME/.oh-my-zsh
+   #+END_SRC
 
    The theme that I'm using:
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  ZSH_THEME="sorin"
-#+END_SRC
+   #+BEGIN_SRC sh :tangle ../home/.zshrc
+     ZSH_THEME="sorin"
+   #+END_SRC
 
    I then disabled auto correction, because it drives me crazy and
    seems like a generally bad idea.
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  DISABLE_CORRECTION="true"
-#+END_SRC
+   #+BEGIN_SRC sh :tangle ../home/.zshrc
+     DISABLE_CORRECTION="true"
+   #+END_SRC
 
-   And I don't load any plugins:
+   And I am currently trying out the git plugin:
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-  # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-  plugins=(git)
-#+END_SRC
+   #+BEGIN_SRC sh :tangle ../home/.zshrc
+     # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+     # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+     plugins=(git)
+   #+END_SRC
 
    Next, we get the core of oh-my-zsh running:
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  source $ZSH/oh-my-zsh.sh
-#+END_SRC
+   #+BEGIN_SRC sh :tangle ../home/.zshrc
+     source $ZSH/oh-my-zsh.sh
+   #+END_SRC
 
    And then we customize.
 
@@ -53,20 +53,20 @@
 
     I run rake all the time. Let's call it =r=.
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  alias r='rake'
-#+END_SRC
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      alias r='rake'
+    #+END_SRC
 
 *** b, be, bec
 
     I run =bundle= and =bundle exec= and =bundle exec cucumber= all the
     time. Let's call them =b=, =be=, and =bec=.
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  alias b='bundle'
-  alias be='bundle exec'
-  alias bec='bundle exec cucumber'
-#+END_SRC
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      alias b='bundle'
+      alias be='bundle exec'
+      alias bec='bundle exec cucumber'
+    #+END_SRC
 
 *** c
 
@@ -77,9 +77,9 @@
     easy_install which, in turn, is used to install Pygments. On MacOS,
     I ran =sudo easy_install Pygments= without any trouble.
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  alias c='pygmentize -O style=autumn -f console256 -g'
-#+END_SRC
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      alias c='pygmentize -O style=autumn -f console256 -g'
+    #+END_SRC
 
 *** cl, cless
 
@@ -87,41 +87,40 @@
     at a page of text at a time, we get the idea combining c and
     less. We'll call it "cless" or "cl" for short.
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  function cless () {
-    colorized=$(c $1)
-    echo $colorized | less
-  }
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      function cless () {
+        colorized=$(c $1)
+        echo $colorized | less
+      }
 
-  alias cl=cless
-#+END_SRC
+      alias cl=cless
+    #+END_SRC
 
 *** Vagrant
 
     These aliases are meant to reduce common vagrant commands to two
     characters.
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  alias v='vagrant'
-  alias vu='vagrant up'
-  alias vs='vagrant ssh'
-  alias vd='vagrant destroy'
-  alias vp='vagrant provision'
-  alias vh='vagrant halt'
-#+END_SRC
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      alias v='vagrant'
+      alias vu='vagrant up'
+      alias vs='vagrant ssh'
+      alias vd='vagrant destroy'
+      alias vp='vagrant provision'
+      alias vh='vagrant halt'
+    #+END_SRC
 
 *** Git
 
     I used to eschew aliases from the official oh-my-zsh git plugin,
     and that meant I had dozens of custom aliases here.
 
-    But,.. as I work with more and more people that are just starting
-    off with git, I makes more sense for me to get them going with
-    oh-my-zsh and its git plugin than to share my custom aliases with
-    them.
+    As I work with more and more people that are just starting off
+    with git, I makes more sense for me to get them going with
+    oh-my-zsh conventions than to share my custom aliases.
 
-    And so, knowing that I've got the git plugin aliases already
-    defined, I add the following:
+    Knowing that I've got the git plugin aliases already defined, I
+    add the following:
 
 **** Fetch Support
 
@@ -188,9 +187,9 @@
 
 *** Maven
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  alias mci='mvn clean install'
-#+END_SRC
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      alias mci='mvn clean install'
+    #+END_SRC
 
 ** Functions
 
@@ -202,75 +201,77 @@
    http://localhost:3000, or you can type =serve <port_number>= and
    see the pwd displayed on port_number.
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  function serve {
-    port="${1:-3000}"
-    ruby -r webrick -e "s = WEBrick::HTTPServer.new(:Port => $port, :DocumentRoot => Dir.pwd); trap('INT') { s.shutdown }; s.start"
-  }
-#+END_SRC
+   #+BEGIN_SRC sh :tangle ../home/.zshrc
+     function serve {
+       port="${1:-3000}"
+       ruby -r webrick -e "s = WEBrick::HTTPServer.new(:Port => $port, :DocumentRoot => Dir.pwd); trap('INT') { s.shutdown }; s.start"
+     }
+   #+END_SRC
 
    I often add remotes for my Github Enterprise (company name is
    roving.com).
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  ghroving-remote-add() {
-    git remote add $1 https://github.roving.com/$1/$2.git
-  }
-#+END_SRC
+   #+BEGIN_SRC sh :tangle ../home/.zshrc
+     ghroving-remote-add() {
+       git remote add $1 https://github.roving.com/$1/$2.git
+     }
+   #+END_SRC
+
 ** Misc
 
 *** RVM
 
-  I use RVM to manage my Rubies. At the end of the RVM install, we're
-  told to setup our ZSH with the following:
+    I sometimes use RVM to manage my Rubies. At the end of the RVM
+    install, we're told to setup our ZSH with the following (it does no
+    harm if rvm isn't present):
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  # RVM
-  [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-#+END_SRC
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      # RVM
+      [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+    #+END_SRC
 
-  I maintain a distinct RVM Gemset for each project on my computer,
-  and so, it's helpful to quickly understand which rvm ruby and rvm
-  gemset is currently active. Thusly, =rvmc= is born, and it's all
-  about =rvm current=.
+    I maintain a distinct RVM Gemset for each project on my computer,
+    and so, it's helpful to quickly understand which rvm ruby and rvm
+    gemset is currently active. Thusly, =rvmc= is born, and it's all
+    about =rvm current=.
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  alias rvmc='rvm current'
-#+END_SRC
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      alias rvmc='rvm current'
+    #+END_SRC
 
-  If I'm creating a new project, or I've cloned someone else's project
-  and they don't use rvm, I'd like to quickly create a .ruby-gemset
-  and .ruby-version as an initializing step. I expect that this would
-  be run from within the root directory of the project, and that
-  directory matches the name of the project. As for a mnemonic, I
-  think of =rvmi= as rvm initialize.
+    If I'm creating a new project, or I've cloned someone else's
+    project and they don't use rvm, I'd like to quickly create a
+    =.ruby-gemset= and =.ruby-version= as an initializing step. I
+    expect that this would be run from within the root directory of
+    the project, and that directory matches the name of the
+    project. As for a mnemonic, I think of =rvmi= as rvm initialize.
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  function rvmi() {
-    PROJECT_NAME=$(basename `pwd`)
-    echo ${PROJECT_NAME} > .ruby-gemset
-    echo "2.1.0" > .ruby-version
-  }
-#+END_SRC
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      function rvmi() {
+        PROJECT_NAME=$(basename `pwd`)
+        echo ${PROJECT_NAME} > .ruby-gemset
+        echo "2.1.0" > .ruby-version
+      }
+    #+END_SRC
 
 *** Java
 
-    I use the Java that comes with my MacOS. I need this setting for
-    a set of internal tools.
+    I use the Java that comes with my MacOS. I need this setting for a
+    set of internal tools.
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
-#+END_SRC
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
+    #+END_SRC
 
     Except.. I'll use a jdk 1.7.x if it is present. I suspect I'll
     remove this shortly.
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  if [ -d /Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home ];
-  then
-    export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home
-  fi
-#+END_SRC
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      if [ -d /Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home ];
+      then
+        export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home
+      fi
+    #+END_SRC
 
 *** Path
 
@@ -282,11 +283,13 @@
     + including stuff that a local project of mine, mrsi, gives me.
     + including stuff that npm gives me.
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
-  export PATH=$PATH:/Users/jnorthridge/.rvm/bin:/Users/jnorthridge/c/misc/mrsi/bin
-  export PATH=$PATH:/usr/local/share/npm/bin
-#+END_SRC
+    Upon review, I don't really use this anymore. Hmm!
+
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
+      export PATH=$PATH:/Users/jnorthridge/.rvm/bin:/Users/jnorthridge/c/misc/mrsi/bin
+      export PATH=$PATH:/usr/local/share/npm/bin
+    #+END_SRC
 
 *** z
 
@@ -297,40 +300,41 @@
     command below if brew is installed or if I find it where boxen
     puts it.
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  brew=$(which brew)
-  if [ -x "$brew" ];
-  then
-    . `brew --prefix`/etc/profile.d/z.sh
-  fi
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      brew=$(which brew)
+      if [ -x "$brew" ];
+      then
+        . `brew --prefix`/etc/profile.d/z.sh
+      fi
 
-  if [ -d "/opt/init-src/z" ];
-  then
-    echo "Sourcing z.sh"
-    . /opt/init-src/z/z.sh
-  fi
-#+END_SRC
+      if [ -d "/opt/init-src/z" ];
+      then
+        echo "Sourcing z.sh"
+        . /opt/init-src/z/z.sh
+      fi
+    #+END_SRC
 
 *** homeshick
 
-    I use [[https://github.com/andsens/homeshick][homeshick]] to manage my dot files. From the homeshick point
-    of view, any git repository with a "home" directory can contain
-    dot-files.
+    I often use [[https://github.com/andsens/homeshick][homeshick]] to manage my dot files. From the homeshick
+    point of view, any git repository with a "home" directory can
+    contain dot-files.
 
     The following comes from the homeshick introduction, and it makes
     it so that I can easily access any homeshick command, such as
     =homeshick pull=.
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  if [ -d "$HOME/.homesick/repos/homeshick" ];
-  then
-    source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-  fi
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      if [ -d "$HOME/.homesick/repos/homeshick" ];
+      then
+        source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+      fi
 
-  function sync_dot_files() {
-    homeshick pull
-  }
-#+END_SRC
+      function sync_dot_files() {
+        homeshick pull
+      }
+   #+END_SRC
+
 ** Boxen
 
    Startup Boxen if it's present. Among other things-- this:
@@ -339,9 +343,9 @@
    + Sets up rbenv shims
    + Lets you type "boxen" and it refreshes the machine.
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  if [ -f "/opt/boxen/env.sh" ];
-  then
-    source /opt/boxen/env.sh
-  fi
-#+END_SRC
+   #+BEGIN_SRC sh :tangle ../home/.zshrc
+     if [ -f "/opt/boxen/env.sh" ];
+     then
+       source /opt/boxen/env.sh
+     fi
+   #+END_SRC
