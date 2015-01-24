@@ -123,33 +123,67 @@
     And so, knowing that I've got the git plugin aliases already
     defined, I add the following:
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  alias gs='git status --short'
-  alias gf='git fetch'
-  alias gfo='git fetch origin'
-  alias gfa='git fetch --all'
-  # gm == git merge without fast forward (I :heart: merge commits)
-  alias gm='git merge --no-ff --log'
-  alias gmv='git mv'
-  alias grm='git rm'
-  alias gr='git reset'
-  alias grom='git reset --hard origin/master'
-  alias gco='git checkout'
-  alias gcom='git checkout master'
-  alias gp='git push'
-  alias gpom='git push origin master'
-#+END_SRC
+**** Fetch Support
 
-    I took this straight up from [[https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh#L108][the git plugin]]. The function defined
-    here is required for the jedcn theme to function.
+     I rarely ever pull, and instead, I fetch and then rebase or
+     merge. Maybe this will change? But, until it does, I add new
+     aliases as it seems the oh-my-zsh git plugin is pull-centric.
 
-#+BEGIN_SRC sh :tangle ../home/.zshrc
-  function current_branch() {
-    ref=$(git symbolic-ref HEAD 2> /dev/null) || \
-    ref=$(git rev-parse --short HEAD 2> /dev/null) || return
-    echo ${ref#refs/heads/}
-  }
-#+END_SRC
+     I would never say it in real life, but I dig that gfo is quite
+     close to gtfo.
+
+     #+BEGIN_SRC sh :tangle ../home/.zshrc
+       alias gf='git fetch'
+       alias gfo='git fetch origin'
+       alias gtfo='git fetch origin'
+       alias gfa='git fetch --all'
+     #+END_SRC
+
+**** I :heart: merge commits
+
+     Near as I can tell, merging a pull request on Github always
+     creates a merge commit, and so, if I'm merging on the command
+     line I like to see this same behavior.
+
+     Thusly-- =gm= is my default command for merging and it adds
+     =--no-ff= to force the creation of a merge commit and =--log= to
+     include a list of what was merged in the message.
+
+     Here's [[https://github.com/jedcn/reveal-ck/commit/0117a90b06ca444188d54172fb8515b851363c5a][an example of a merge + merge commit]] created in this
+     fashion.
+
+     #+BEGIN_SRC sh :tangle ../home/.zshrc
+       alias gm='git merge --no-ff --log'
+     #+END_SRC
+
+**** gcom, grom, gpom
+
+     We do so much work around master, it makes sense to have a series
+     of functions that orient around it:
+
+     #+BEGIN_SRC sh :tangle ../home/.zshrc
+       alias grom='git reset --hard origin/master'
+       alias gcom='git checkout master'
+       alias gpom='git push origin master'
+     #+END_SRC
+
+**** All the Rest
+
+     And here's the remainder.
+
+     I'm surprised the git plugin doesn't have grm and gmv.
+
+     When it comes to =git push --force=, I avoid an alias like =gpf=
+     and I instead fall back typing out =--force= each time, ala, =gp
+     -force=:
+
+     #+BEGIN_SRC sh :tangle ../home/.zshrc
+       alias gs='git status --short'
+       alias gmv='git mv'
+       alias grm='git rm'
+       alias gco='git checkout'
+       alias gp='git push'
+     #+END_SRC
 
 *** Maven
 

@@ -33,26 +33,22 @@ alias vd='vagrant destroy'
 alias vp='vagrant provision'
 alias vh='vagrant halt'
 
-alias gs='git status --short'
 alias gf='git fetch'
 alias gfo='git fetch origin'
+alias gtfo='git fetch origin'
 alias gfa='git fetch --all'
-# gm == git merge without fast forward (I :heart: merge commits)
+
 alias gm='git merge --no-ff --log'
-alias gmv='git mv'
-alias grm='git rm'
-alias gr='git reset'
+
 alias grom='git reset --hard origin/master'
-alias gco='git checkout'
 alias gcom='git checkout master'
-alias gp='git push'
 alias gpom='git push origin master'
 
-function current_branch() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || \
-  ref=$(git rev-parse --short HEAD 2> /dev/null) || return
-  echo ${ref#refs/heads/}
-}
+alias gs='git status --short'
+alias gmv='git mv'
+alias grm='git rm'
+alias gco='git checkout'
+alias gp='git push'
 
 alias mci='mvn clean install'
 
