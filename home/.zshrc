@@ -1,15 +1,20 @@
 
 ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="sorin"
-
 DISABLE_CORRECTION="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(git)
 
+ZSH_THEME="sorin"
+
 source $ZSH/oh-my-zsh.sh
+
+RPROMPT='${time} %{$fg[magenta]%}$(git_prompt_short_sha)%{$reset_color%}$(git_prompt_status)%{$reset_color%}$(git_prompt_ahead)%{$reset_color%}'
+time_enabled="%(?.%{$fg[green]%}.%{$fg[red]%})%*%{$reset_color%}"
+time_disabled="%{$fg[green]%}%*%{$reset_color%}"
+time=$time_enabled
 
 alias r='rake'
 

@@ -6,41 +6,69 @@
 
 ** Basic Setup
 
-   This needs to be the path to my oh-my-zsh configuration. It's magic
-   to me:
+*** Getting Started
 
-   #+BEGIN_SRC sh :tangle ../home/.zshrc
-     ZSH=$HOME/.oh-my-zsh
-   #+END_SRC
+    This needs to be the path to my oh-my-zsh configuration. It's
+    magic to me:
 
-   The theme that I'm using:
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      ZSH=$HOME/.oh-my-zsh
+    #+END_SRC
 
-   #+BEGIN_SRC sh :tangle ../home/.zshrc
-     ZSH_THEME="sorin"
-   #+END_SRC
+    I disable auto correction. This happened years ago, but I recall
+    that it was messing with my cadence and generally making bad
+    suggestions.
 
-   I then disabled auto correction, because it drives me crazy and
-   seems like a generally bad idea.
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      DISABLE_CORRECTION="true"
+    #+END_SRC
 
-   #+BEGIN_SRC sh :tangle ../home/.zshrc
-     DISABLE_CORRECTION="true"
-   #+END_SRC
+    I am currently trying out the git plugin:
 
-   And I am currently trying out the git plugin:
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+      # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+      plugins=(git)
+    #+END_SRC
 
-   #+BEGIN_SRC sh :tangle ../home/.zshrc
-     # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-     # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-     plugins=(git)
-   #+END_SRC
+    The theme that I'm using:
 
-   Next, we get the core of oh-my-zsh running:
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      ZSH_THEME="sorin"
+    #+END_SRC
 
-   #+BEGIN_SRC sh :tangle ../home/.zshrc
-     source $ZSH/oh-my-zsh.sh
-   #+END_SRC
+    Next, we get the core of oh-my-zsh running:
 
-   And then we customize.
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      source $ZSH/oh-my-zsh.sh
+    #+END_SRC
+
+*** Theme Tweaks
+
+    I'm using a theme above, but I have a few customizations.
+
+    Sourcing =oh-my-zsh.zsh= gets things going, and it takes the value
+    stored in =ZSH_THEME= and sources it. Now that it's defined, we
+    can customize it.
+
+    What I'm looking to do with these customizations is add context
+    (time of day and git sha) to my prompt. The idea is that if you're
+    working over the course of the day (and committing), and then
+    things take a turn for the worse, you'll be able to scroll
+    backwards through your session-- watching yourself issue commands
+    and commits-- and alongside those you'll see the time and a sha to
+    jump back to (say, via a =reset --hard=).
+
+    People can use =git reflog= to get at the SHAs, but, they won't
+    have the same context that comes from the time and the commands
+    they were typing as they review the list of SHAs.
+
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      RPROMPT='${time} %{$fg[magenta]%}$(git_prompt_short_sha)%{$reset_color%}$(git_prompt_status)%{$reset_color%}$(git_prompt_ahead)%{$reset_color%}'
+      time_enabled="%(?.%{$fg[green]%}.%{$fg[red]%})%*%{$reset_color%}"
+      time_disabled="%{$fg[green]%}%*%{$reset_color%}"
+      time=$time_enabled
+    #+END_SRC
 
 ** Aliases
 
