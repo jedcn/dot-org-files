@@ -195,6 +195,24 @@
        alias grom='git reset --hard origin/master'
      #+END_SRC
 
+**** Things I Override
+
+     There are a few things I really don't use or like from oh-my-zsh,
+     and they are:
+
+     * gca: oh-my-zsh uses this for =git commit --all=, which I don't
+       do. Instead, I'll =git add .= and then commit. Further-- I
+       amend frequently, and so =gca= is a mnemonic for *g*it *c*ommit
+       *a*mend.
+     * gl: oh-my-zsh uses this for =git pull=, and I never
+       pull. Instead, I am thinking it is handy way to get a graphical
+       *g*it *l*og.
+
+     #+BEGIN_SRC sh :tangle ../home/.zshrc
+       alias gca='git commit --amend'
+       alias gl='glog --all'
+     #+END_SRC
+
 **** All the Rest
 
      And here's the remainder.

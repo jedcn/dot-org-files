@@ -50,6 +50,9 @@ alias gdom='git diff origin/master'
 alias gpom='git push origin master'
 alias grom='git reset --hard origin/master'
 
+alias gca='git commit --amend'
+alias gl='glog --all'
+
 alias gs='git status --short'
 alias gmv='git mv'
 alias grm='git rm'
