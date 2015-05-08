@@ -159,3 +159,6 @@
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 
 (setq make-backup-files nil)
+
+(global-set-key "\C-x\C-m" 'execute-extended-command)
+(global-set-key "\M-P" 'execute-extended-command)

@@ -368,3 +368,12 @@
     #+BEGIN_SRC emacs-lisp
       (setq make-backup-files nil)
     #+END_SRC
+
+*** Other ways to execute commands
+
+    Yegge Style and Sublime Style:
+
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key "\C-x\C-m" 'execute-extended-command)
+      (global-set-key "\M-P" 'execute-extended-command)
+    #+END_SRC
