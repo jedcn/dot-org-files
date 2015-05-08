@@ -121,3 +121,6 @@ if [ -f "/opt/boxen/env.sh" ];
 then
   source /opt/boxen/env.sh
 fi
+
+export PATH="$HOME/.nodenv/bin:$PATH"
+eval "(nodenv init -)"
