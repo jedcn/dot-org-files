@@ -1,0 +1,370 @@
+* Getting Started
+
+  #+BEGIN_SRC emacs-lisp
+    ;;
+    ;; Do not modify this file!
+    ;;
+    ;; It is generated from init.org
+    ;;
+  #+END_SRC
+
+  If this file is placed at =~/.emacs.d/init.org=, you can make
+  changes to it and load those changes into your session (temporarily)
+  by pressing =C-c i=:
+
+  #+BEGIN_SRC emacs-lisp
+    (global-set-key (kbd "C-c i")
+                    (lambda()
+                      (interactive)
+                      (org-babel-load-file "~/.emacs.d/init.org")))
+  #+END_SRC
+
+* System Integration
+
+  Whenever emacs needs to run an external command as part of a
+  subprocess, like "ruby" or "coffeelint," it looks in =exec-path=,
+  and so it is set explicitly:
+
+  #+BEGIN_SRC emacs-lisp
+    (setq jedcn-explicit-env-path
+          (concat "/opt/boxen/rbenv/shims:/opt/boxen/nodenv/shims:"
+                  "/usr/bin:/bin:/usr/sbin:/sbin:"
+                  "/usr/local/bin:/usr/local/share/npm/bin"))
+    (defun jedcn-sync-env-path-and-exec-path (desired-path)
+      "Sets exec-path and env 'PATH' based on DESIRED-PATH"
+      (setenv "PATH" desired-path)
+      (setq exec-path (split-string desired-path ":")))
+    (jedcn-sync-env-path-and-exec-path jedcn-explicit-env-path)
+  #+END_SRC
+
+* Packages
+
+** Cask
+
+   Packages to be installed are called out in the =Cask= file.
+
+   To call out a new package, add a line like =(depends-on "xyz")=,
+   and then re-run =cask install= from =~/.emacs.d=. Restart emacs.
+
+   #+BEGIN_SRC emacs-lisp
+     (if (file-exists-p "/opt/boxen/homebrew/Cellar/cask/0.7.2/cask.el")
+         (require 'cask "/opt/boxen/homebrew/Cellar/cask/0.7.2/cask.el"))
+     (if (file-exists-p "/usr/local/share/emacs/site-lisp/cask.el")
+         (require 'cask "/usr/local/share/emacs/site-lisp/cask.el"))
+     (cask-initialize)
+   #+END_SRC
+
+** magit
+
+   Basic setup:
+
+   #+BEGIN_SRC emacs-lisp
+     (setq magit-last-seen-setup-instructions "1.4.0")
+     (require 'magit)
+   #+END_SRC
+
+   Start magit with M-m. Magit will be full screen. Press "q" when you
+   are done, and magit will be dismissed and what you were previously
+   looking at will be restored.
+
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "M-g") 'magit-status)
+
+     (defadvice magit-status (around magit-fullscreen activate)
+       (window-configuration-to-register :magit-fullscreen)
+       ad-do-it
+       (delete-other-windows))
+
+     (defun magit-quit-session ()
+       "Restores the previous window configuration and kills the magit buffer"
+       (interactive)
+       (kill-buffer)
+       (jump-to-register :magit-fullscreen))
+
+     (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
+   #+END_SRC
+
+   Press "w" while to toggle whether or not whitespace differences are
+   shown in magit diff.
+
+   #+BEGIN_SRC emacs-lisp
+     (defun magit-toggle-whitespace ()
+       (interactive)
+       (if (member "-w" magit-diff-options)
+           (magit-dont-ignore-whitespace)
+         (magit-ignore-whitespace)))
+
+     (defun magit-ignore-whitespace ()
+       (interactive)
+       (add-to-list 'magit-diff-options "-w")
+       (magit-refresh))
+
+     (defun magit-dont-ignore-whitespace ()
+       (interactive)
+       (setq magit-diff-options (remove "-w" magit-diff-options))
+       (magit-refresh))
+
+     (define-key magit-status-mode-map (kbd "W") 'magit-toggle-whitespace)
+   #+END_SRC
+
+   Highlight fine differences within changed lines:
+
+   #+BEGIN_SRC emacs-lisp
+     (setq magit-diff-refine-hunk 'all)
+   #+END_SRC
+
+** org
+
+   Start by showing everything in a file.
+
+   Only show "the last" star.
+
+   Syntax highlight the content in a BEGIN_SRC/END_SRC blocks.
+
+   #+BEGIN_SRC emacs-lisp
+     (setq org-startup-folded 'showeverything)
+     (setq org-hide-leading-stars 'hidestars)
+     (setq org-src-fontify-natively t)
+   #+END_SRC
+
+** coffee
+
+   Each level should be indented 2 spaces:
+
+   #+BEGIN_SRC emacs-lisp
+     (setq coffee-tab-width 2)
+   #+END_SRC
+
+** flycheck
+
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'after-init-hook #'global-flycheck-mode)
+   #+END_SRC
+
+** company
+
+   Autocomplete with company. Start completing with M-/. Select
+   between choices using: C-n or C-p.
+
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'after-init-hook 'global-company-mode)
+     (global-set-key (kbd "M-/") 'company-complete)
+     (eval-after-load 'company
+       '(progn
+          (define-key company-active-map (kbd "M-n") nil)
+          (define-key company-active-map (kbd "M-p") nil)
+          (define-key company-active-map (kbd "C-n") #'company-select-next)
+          (define-key company-active-map (kbd "C-p") #'company-select-previous)))
+   #+END_SRC
+
+** helm
+
+   Use helm for:
+
+   |-------------------------------+---------|
+   | Selecting Commands to Run     | M-x     |
+   | Selecting Between Buffers     | C-x b   |
+   | Finding Files                 | C-x C-f |
+   | Looking through the Kill Ring | M-y     |
+   |-------------------------------+---------|
+
+   #+BEGIN_SRC emacs-lisp
+     (require 'helm)
+     (require 'helm-config)
+     (global-set-key (kbd "M-x") 'helm-M-x)
+     (global-set-key (kbd "C-x b") 'helm-mini)
+     (global-set-key (kbd "C-x C-f") 'helm-find-files)
+     (global-set-key (kbd "M-y") 'helm-show-kill-ring)
+   #+END_SRC
+
+   If you are using helm, and you press <tab>, it will select what
+   you've got under point:
+
+   #+BEGIN_SRC emacs-lisp
+     (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+   #+END_SRC
+
+** projectile
+
+   Projectile + Helm.
+
+   |----------------------------------+---------|
+   | Pick a project, then pick a file | C-c p p |
+   | Once in a project, pick a file   | C-c p f |
+   |----------------------------------+---------|
+   | Sublime Text Pick a File         | M-t     |
+   |----------------------------------+---------|
+
+   #+BEGIN_SRC emacs-lisp
+     (projectile-global-mode)
+     (setq projectile-completion-system 'helm)
+     (helm-projectile-on)
+     (setq projectile-switch-project-action 'helm-projectile)
+     (global-set-key (kbd "M-t") 'projectile-find-file)
+   #+END_SRC
+
+** diminish
+
+   Do not show information about the following minor modes:
+
+   #+BEGIN_SRC emacs-lisp
+     (diminish 'projectile-mode)
+     (diminish 'magit-auto-revert-mode)
+     (eval-after-load "flycheck" '(diminish 'flycheck-mode))
+     (eval-after-load "company" '(diminish 'company-mode))
+   #+END_SRC
+
+* Basics
+
+  Pressing "command" on a MacOS keyboard performs the M in M-x. You can
+  still the default ("option") if you'd like:
+
+  #+BEGIN_SRC emacs-lisp
+    (setq mac-command-modifier 'meta)
+  #+END_SRC
+
+  CTRL-+ should increase font size, and CTRL-- should decrease it:
+
+  #+BEGIN_SRC emacs-lisp
+    (define-key global-map (kbd "C-+") 'text-scale-increase)
+    (define-key global-map (kbd "C--") 'text-scale-decrease)
+  #+END_SRC
+
+  Ask for only "y" or "n":
+
+  #+BEGIN_SRC emacs-lisp
+    (defalias 'yes-or-no-p 'y-or-n-p)
+  #+END_SRC
+
+** Visual Changes
+
+*** Theme
+
+    #+BEGIN_SRC emacs-lisp
+      (require 'leuven-theme)
+    #+END_SRC
+
+*** Font
+
+    #+BEGIN_SRC emacs-lisp
+      (if window-system
+          (set-face-attribute 'default nil :font "Menlo-18"))
+    #+END_SRC
+
+*** Line and column number.
+
+    Make them visible at the bottom of the screen:
+
+    #+BEGIN_SRC emacs-lisp
+      (setq line-number-mode t)
+      (setq column-number-mode t)
+    #+END_SRC
+
+*** Highlight current line.
+
+    #+BEGIN_SRC emacs-lisp
+      (defun highlight-current-line ()
+        (hl-line-mode t))
+      (add-hook 'prog-mode-hook 'highlight-current-line)
+      (add-hook 'text-mode-hook 'highlight-current-line)
+    #+END_SRC
+
+*** Turn off the toolbar.
+
+    #+BEGIN_SRC emacs-lisp
+      (tool-bar-mode -1)
+    #+END_SRC
+
+*** Highlight matching paren.
+
+    #+BEGIN_SRC emacs-lisp
+      (show-paren-mode 1)
+    #+END_SRC
+
+** Behaviors
+
+*** Removing trailing whitespace.
+
+    Can be disabled with:
+
+    =(setq jedcn-remove-trailing-whitespace-on-save nil)=
+
+    Re-enabled with:
+
+    =(setq jedcn-remove-trailing-whitespace-on-save t)=
+
+    #+BEGIN_SRC emacs-lisp
+      (setq jedcn-remove-trailing-whitespace-on-save t)
+
+      (defun remove-trailing-whitespace ()
+        "Perform a bunch of safe operations on the whitespace content of a buffer."
+        (interactive)
+        (if (equal jedcn-remove-trailing-whitespace-on-save t)
+            (progn
+              (untabify (point-min) (point-max))
+              (delete-trailing-whitespace)
+              (set-buffer-file-coding-system 'utf-8))))
+
+      (add-hook 'before-save-hook 'remove-trailing-whitespace)
+    #+END_SRC
+
+*** Don't beep, flash screen instead.
+
+    #+BEGIN_SRC emacs-lisp
+      (setq visible-bell t)
+    #+END_SRC
+
+*** Don't show startup screen.
+
+    #+BEGIN_SRC emacs-lisp
+      (setq inhibit-startup-message t)
+    #+END_SRC
+
+*** Add directory info to buffer names.
+
+    This avoids the default when two buffers have the same name:
+    =name= and =name<2>=.
+
+    #+BEGIN_SRC emacs-lisp
+      (require 'uniquify)
+      (setq uniquify-buffer-name-style 'post-forward)
+    #+END_SRC
+
+*** Add a newline at the end of each file.
+
+    #+BEGIN_SRC emacs-lisp
+      (setq require-final-newline t)
+    #+END_SRC
+
+*** Save clipboard strings into kill ring before replacing them.
+
+    #+BEGIN_SRC emacs-lisp
+      (setq save-interprogram-paste-before-kill t)
+    #+END_SRC
+
+*** It is not OK to use tabs when indenting.
+
+    #+BEGIN_SRC emacs-lisp
+      (setq indent-tabs-mode nil)
+    #+END_SRC
+
+*** Remember place the next time you visit a file.
+
+    #+BEGIN_SRC emacs-lisp
+      (require 'saveplace)
+      (setq-default save-place t)
+      (setq save-place-file (concat user-emacs-directory "places"))
+    #+END_SRC
+
+*** Search with regular expressions
+
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key (kbd "C-s") 'isearch-forward-regexp)
+      (global-set-key (kbd "C-r") 'isearch-backward-regexp)
+    #+END_SRC
+
+*** Do not make backup files
+
+    #+BEGIN_SRC emacs-lisp
+      (setq make-backup-files nil)
+    #+END_SRC
