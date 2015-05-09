@@ -98,8 +98,14 @@
 
 (diminish 'projectile-mode)
 (diminish 'magit-auto-revert-mode)
-(eval-after-load "flycheck" '(diminish 'flycheck-mode))
 (eval-after-load "company" '(diminish 'company-mode))
+(eval-after-load "flycheck" '(diminish 'flycheck-mode))
+(eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
+
+(require 'yasnippet)
+(setq yas-snippet-dirs
+      (concat user-emacs-directory "snippets"))
+(yas-global-mode 1)
 
 (setq mac-command-modifier 'meta)
 

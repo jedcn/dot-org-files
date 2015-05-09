@@ -11,3 +11,4 @@
 (depends-on "magit")
 (depends-on "markdown-mode")
 (depends-on "projectile")
+(depends-on "yasnippet")
