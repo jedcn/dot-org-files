@@ -51,7 +51,8 @@ alias gpom='git push origin master'
 alias grom='git reset --hard origin/master'
 
 alias gca='git commit --amend'
-alias gl='glog --all'
+alias gl='glog'
+alias gla='glog --all'
 
 alias gs='git status --short'
 alias gmv='git mv'
@@ -122,5 +123,6 @@ then
   source /opt/boxen/env.sh
 fi
 
-export PATH="$HOME/.nodenv/bin:$PATH"
-eval "(nodenv init -)"
+if [ -x "/opt/boxen/nodenv/bin/nodenv" ]; then
+  eval "(nodenv init -)"
+fi

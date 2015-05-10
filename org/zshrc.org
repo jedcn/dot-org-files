@@ -210,7 +210,8 @@
 
      #+BEGIN_SRC sh :tangle ../home/.zshrc
        alias gca='git commit --amend'
-       alias gl='glog --all'
+       alias gl='glog'
+       alias gla='glog --all'
      #+END_SRC
 
 **** All the Rest
@@ -416,3 +417,12 @@
        source /opt/boxen/env.sh
      fi
    #+END_SRC
+
+    The [[https://github.com/wfarr/nodenv][installation instructions]] of nodenv say that you should start
+    nodenv with your shell:
+
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      if [ -x "/opt/boxen/nodenv/bin/nodenv" ]; then
+        eval "(nodenv init -)"
+      fi
+    #+END_SRC
