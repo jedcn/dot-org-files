@@ -295,13 +295,9 @@
 
 *** Removing trailing whitespace.
 
-    Can be disabled with:
+    Toggle by running:
 
-    =(setq jedcn-remove-trailing-whitespace-on-save nil)=
-
-    Re-enabled with:
-
-    =(setq jedcn-remove-trailing-whitespace-on-save t)=
+    =jedcn-toggle-remove-trailing-whitespace-on-save=
 
     #+BEGIN_SRC emacs-lisp
       (setq jedcn-remove-trailing-whitespace-on-save t)
@@ -316,6 +312,18 @@
               (set-buffer-file-coding-system 'utf-8))))
 
       (add-hook 'before-save-hook 'remove-trailing-whitespace)
+
+      (defun jedcn-toggle-remove-trailing-whitespace-on-save ()
+        "Toggle whether or not whitespace will be removed on save"  
+        (interactive)
+        (if jedcn-remove-trailing-whitespace-on-save
+            (progn
+              (message "The next save will *not* remove trailing whitespace.")
+              (setq jedcn-remove-trailing-whitespace-on-save nil))
+          (progn
+            (message "The next save will remove trailing whitespace.")
+            (setq jedcn-remove-trailing-whitespace-on-save t))))
+
     #+END_SRC
 
 *** Don't beep, flash screen instead.

@@ -144,6 +144,17 @@
 
 (add-hook 'before-save-hook 'remove-trailing-whitespace)
 
+(defun jedcn-toggle-remove-trailing-whitespace-on-save ()
+  "Toggle whether or not whitespace will be removed on save"  
+  (interactive)
+  (if jedcn-remove-trailing-whitespace-on-save
+      (progn
+        (message "The next save will *not* remove trailing whitespace.")
+        (setq jedcn-remove-trailing-whitespace-on-save nil))
+    (progn
+      (message "The next save will remove trailing whitespace.")
+      (setq jedcn-remove-trailing-whitespace-on-save t))))
+
 (setq visible-bell t)
 
 (setq inhibit-startup-message t)
