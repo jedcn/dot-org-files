@@ -1,0 +1,4 @@
+# -*- mode: ruby; require-final-newline: nil; backup-inhibited: t -*-
+#name: puts "variable: #{variable}"
+# --
+puts "$1: #{${1:var}}"$0
