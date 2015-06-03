@@ -70,6 +70,8 @@
 
 (setq coffee-tab-width 2)
 
+(setq js-indent-level 2)
+
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 (add-hook 'after-init-hook 'global-company-mode)

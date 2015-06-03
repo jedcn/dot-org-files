@@ -135,6 +135,15 @@
      (setq coffee-tab-width 2)
    #+END_SRC
 
+** js
+
+   Each level should be indented 2 spaces:
+
+   #+BEGIN_SRC emacs-lisp
+     (setq js-indent-level 2)
+   #+END_SRC
+
+
 ** flycheck
 
    #+BEGIN_SRC emacs-lisp
