@@ -16,6 +16,8 @@ time_enabled="%(?.%{$fg[green]%}.%{$fg[red]%})%*%{$reset_color%}"
 time_disabled="%{$fg[green]%}%*%{$reset_color%}"
 time=$time_enabled
 
+alias e=emacsclient
+
 alias r='rake'
 
 alias b='bundle'

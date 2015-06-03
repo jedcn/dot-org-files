@@ -434,3 +434,14 @@
 
       (setq linum-format " %4d ")
     #+END_SRC
+
+** Server
+
+   Setup an emacs server on start.
+
+   Use emacsclient to "edit" with a shared emacs. Press =C-x #= when
+   done.
+
+   #+BEGIN_SRC emacs-lisp
+     (server-start)
+   #+END_SRC
