@@ -147,7 +147,7 @@
 (add-hook 'before-save-hook 'remove-trailing-whitespace)
 
 (defun jedcn-toggle-remove-trailing-whitespace-on-save ()
-  "Toggle whether or not whitespace will be removed on save"  
+  "Toggle whether or not whitespace will be removed on save"
   (interactive)
   (if jedcn-remove-trailing-whitespace-on-save
       (progn
