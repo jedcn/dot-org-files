@@ -53,6 +53,7 @@ alias gpom='git push origin master'
 alias grom='git reset --hard origin/master'
 
 alias gca='git commit --amend'
+alias gdc='git diff --cached'
 alias gl='glog'
 alias gla='glog --all'
 

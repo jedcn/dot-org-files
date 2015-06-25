@@ -216,12 +216,16 @@
        do. Instead, I'll =git add .= and then commit. Further-- I
        amend frequently, and so =gca= is a mnemonic for *g*it *c*ommit
        *a*mend.
+     * gdc: oh-my-zsh used to use this for =git diff --cached= but it
+       conflicted with the GNU D Compiler (gdc). I've never heard of
+       that, so, it's back for me.
      * gl: oh-my-zsh uses this for =git pull=, and I never
        pull. Instead, I am thinking it is handy way to get a graphical
        *g*it *l*og.
 
      #+BEGIN_SRC sh :tangle ../home/.zshrc
        alias gca='git commit --amend'
+       alias gdc='git diff --cached'
        alias gl='glog'
        alias gla='glog --all'
      #+END_SRC
