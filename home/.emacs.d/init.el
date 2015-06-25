@@ -20,6 +20,8 @@
   (setq exec-path (split-string desired-path ":")))
 (jedcn-sync-env-path-and-exec-path jedcn-explicit-env-path)
 
+(setenv "NODENV_VERSION" "v0.10")
+
 (if (file-exists-p "/opt/boxen/homebrew/Cellar/cask/0.7.2/cask.el")
     (require 'cask "/opt/boxen/homebrew/Cellar/cask/0.7.2/cask.el"))
 (if (file-exists-p "/usr/local/share/emacs/site-lisp/cask.el")
