@@ -52,6 +52,14 @@ alias gdom='git diff origin/master'
 alias gpom='git push origin master'
 alias grom='git reset --hard origin/master'
 
+function gcob () {
+  origin_branch_name=$1
+  branch_name_without_origin=$(echo $origin_branch_name | sed 's/origin\///')
+  local_branch_name=$branch_name_without_origin
+  echo "Creating branch '$local_branch_name' based on '$origin_branch_name'"
+  git checkout -b $local_branch_name $origin_branch_name
+}
+
 alias gca='git commit --amend'
 alias gdc='git diff --cached'
 alias gl='glog'
