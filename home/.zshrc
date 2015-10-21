@@ -40,6 +40,18 @@ alias vd='vagrant destroy'
 alias vp='vagrant provision'
 alias vh='vagrant halt'
 
+unalias g
+
+g() {
+  if [[ $# > 0 ]]; then
+    git $@
+  else
+    git status
+  fi
+}
+
+compdef g=git
+
 alias gf='git fetch'
 alias gfo='git fetch origin'
 alias gtfo='git fetch origin'

@@ -162,6 +162,32 @@
     Knowing that I've got the git plugin aliases already defined, I
     add the following:
 
+**** g
+
+     First, stop zsh's git plugin from taking over g.
+
+     Then make =g=, by itself, be =git status=.
+
+     If used with arguments, then make =g= be =git=
+
+     Finally, complete =g= like =git=.
+
+     This comes from [[https://github.com/thoughtbot/dotfiles/blob/master/zsh/functions/g][thoughtbot's dotfiles]].
+
+     #+BEGIN_SRC sh :tangle ../home/.zshrc
+       unalias g
+
+       g() {
+         if [[ $# > 0 ]]; then
+           git $@
+         else
+           git status
+         fi
+       }
+
+       compdef g=git
+     #+END_SRC
+
 **** Fetch Support
 
      I rarely ever pull, and instead, I fetch and then rebase or
