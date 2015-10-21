@@ -53,9 +53,6 @@ g() {
 compdef g=git
 
 alias gf='git fetch'
-alias gfo='git fetch origin'
-alias gtfo='git fetch origin'
-alias gfa='git fetch --all'
 
 alias gm='git merge --no-ff --log'
 

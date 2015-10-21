@@ -194,14 +194,8 @@
      merge. Maybe this will change? But, until it does, I add new
      aliases as it seems the oh-my-zsh git plugin is pull-centric.
 
-     I would never say it in real life, but I dig that gfo is quite
-     close to gtfo.
-
      #+BEGIN_SRC sh :tangle ../home/.zshrc
        alias gf='git fetch'
-       alias gfo='git fetch origin'
-       alias gtfo='git fetch origin'
-       alias gfa='git fetch --all'
      #+END_SRC
 
 **** I :heart: merge commits
