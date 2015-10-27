@@ -73,7 +73,7 @@
      (require 'magit)
    #+END_SRC
 
-   Start magit with M-m. Magit will be full screen. Press "q" when you
+   Start magit with M-g. Magit will be full screen. Press "q" when you
    are done, and magit will be dismissed and what you were previously
    looking at will be restored.
 
@@ -152,7 +152,6 @@
    #+BEGIN_SRC emacs-lisp
      (setq js-indent-level 2)
    #+END_SRC
-
 
 ** flycheck
 
