@@ -202,4 +202,7 @@
 
 (setq linum-format " %4d ")
 
+(global-set-key (kbd "C-M-+") 'er/expand-region)
+(global-set-key (kbd "C-M--") 'er/contract-region)
+
 (server-start)

@@ -440,6 +440,24 @@
       (setq linum-format " %4d ")
     #+END_SRC
 
+*** Semantic Expansion + Contraction
+
+    This keybinding represents the combination of two ideas:
+
+    1. The keys + or - makes things grow and shrink. For example,
+       font-size grows with COMMAND-+ in Chrome on MacOs.
+    2. There's an emacs convention that associates =C-M= with
+       sexp/list/semantic movement. For example C-M-n, C-M-p, C-M-u,
+       C-M-d, C-M-a, C-M-e, C-M-k
+
+    Putting these together, the following works with the
+    =expand-region= package to grow and shrink a region semantically.
+
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key (kbd "C-M-+") 'er/expand-region)
+      (global-set-key (kbd "C-M--") 'er/contract-region)
+    #+END_SRC
+
 ** Server
 
    Setup an emacs server on start.

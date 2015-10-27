@@ -4,6 +4,7 @@
 (depends-on "coffee-mode")
 (depends-on "company")
 (depends-on "diminish")
+(depends-on "expand-region")
 (depends-on "flycheck")
 (depends-on "helm")
 (depends-on "helm-projectile")
