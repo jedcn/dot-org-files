@@ -35,24 +35,24 @@
 
   #
   # The following 'bind' lines allow you to hold "CTRL" and "COMMAND"
-  # and then press a third key that corresponds to 9 sections of a
-  # square:
+  # and "SHIFT" and then press a third key that corresponds to 9
+  # sections of a square:
   #
   #   u  i  o
   #   j  k  l
   #   m  ,  .
   #
-  bind u:ctrl;cmd  ${topleft}
-  bind j:ctrl;cmd  ${lefthalf}
-  bind m:ctrl;cmd  ${bottomleft}
+  bind u:ctrl;cmd;shift  ${topleft}
+  bind j:ctrl;cmd;shift  ${lefthalf}
+  bind m:ctrl;cmd;shift  ${bottomleft}
 
-  bind i:ctrl;cmd  ${tophalf}
-  bind k:ctrl;cmd  ${full}
-  bind ,:ctrl;cmd  ${bottomhalf}
+  bind i:ctrl;cmd;shift  ${tophalf}
+  bind k:ctrl;cmd;shift  ${full}
+  bind ,:ctrl;cmd;shift  ${bottomhalf}
 
-  bind o:ctrl;cmd  ${topright}
-  bind l:ctrl;cmd  ${righthalf}
-  bind .:ctrl;cmd  ${bottomright}
+  bind o:ctrl;cmd;shift  ${topright}
+  bind l:ctrl;cmd;shift  ${righthalf}
+  bind .:ctrl;cmd;shift  ${bottomright}
 
   #
   # These bindings make it so that you can more easily move windows to
