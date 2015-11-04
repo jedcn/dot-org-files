@@ -104,7 +104,7 @@ function rvmi() {
   echo "2.1.0" > .ruby-version
 }
 
-export NODENV_VERSION=v0.10
+export NODENV_VERSION=4.1.1
 
 export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 

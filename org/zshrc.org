@@ -370,7 +370,7 @@
     environment variable:
 
     #+BEGIN_SRC sh :tangle ../home/.zshrc
-      export NODENV_VERSION=v0.10
+      export NODENV_VERSION=4.1.1
     #+END_SRC
 
 *** Java
