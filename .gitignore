@@ -1,0 +1,7 @@
+# If you link ~/.emacs.d to <dot-org-files>/home/.emacs.d/..
+
+# And then run a cask install, the packages will be installed here:
+home/.emacs.d/.cask
+
+# And projectile will put bookmarks here:
+home/.emacs.d/projectile-bookmarks.eld

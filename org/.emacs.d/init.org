@@ -59,6 +59,8 @@
    #+BEGIN_SRC emacs-lisp
      (if (file-exists-p "/opt/boxen/homebrew/Cellar/cask/0.7.2/cask.el")
          (require 'cask "/opt/boxen/homebrew/Cellar/cask/0.7.2/cask.el"))
+     (if (file-exists-p "/opt/boxen/homebrew/Cellar/cask/0.7.3/cask.el")
+         (require 'cask "/opt/boxen/homebrew/Cellar/cask/0.7.3/cask.el"))
      (if (file-exists-p "/usr/local/share/emacs/site-lisp/cask.el")
          (require 'cask "/usr/local/share/emacs/site-lisp/cask.el"))
      (cask-initialize)
@@ -227,7 +229,6 @@
 
    #+BEGIN_SRC emacs-lisp
      (diminish 'projectile-mode)
-     (diminish 'magit-auto-revert-mode)
      (eval-after-load "company" '(diminish 'company-mode))
      (eval-after-load "flycheck" '(diminish 'flycheck-mode))
      (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
