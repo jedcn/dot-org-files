@@ -5,3 +5,6 @@ home/.emacs.d/.cask
 
 # And projectile will put bookmarks here:
 home/.emacs.d/projectile-bookmarks.eld
+
+# And places will be saved here:
+home/.emacs.d/places
