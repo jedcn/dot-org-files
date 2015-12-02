@@ -117,18 +117,6 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
 export PATH=$PATH:/Users/jnorthridge/.rvm/bin:/Users/jnorthridge/c/misc/mrsi/bin
 export PATH=$PATH:/usr/local/share/npm/bin
 
-brew=$(which brew)
-if [ -x "$brew" ];
-then
-  . `brew --prefix`/etc/profile.d/z.sh
-fi
-
-if [ -d "/opt/init-src/z" ];
-then
-  echo "Sourcing z.sh"
-  . /opt/init-src/z/z.sh
-fi
-
 if [ -d "$HOME/.homesick/repos/homeshick" ];
 then
   source "$HOME/.homesick/repos/homeshick/homeshick.sh"

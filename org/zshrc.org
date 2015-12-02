@@ -410,29 +410,6 @@
       export PATH=$PATH:/usr/local/share/npm/bin
     #+END_SRC
 
-*** z
-
-    I use [[https://github.com/rupa/z][z]] to jump around. It watches what you do, learns, and then
-    lets you fuzzy jump.
-
-    Presently, I'm getting "z" from brew, and so I only run the setup
-    command below if brew is installed or if I find it where boxen
-    puts it.
-
-    #+BEGIN_SRC sh :tangle ../home/.zshrc
-      brew=$(which brew)
-      if [ -x "$brew" ];
-      then
-        . `brew --prefix`/etc/profile.d/z.sh
-      fi
-
-      if [ -d "/opt/init-src/z" ];
-      then
-        echo "Sourcing z.sh"
-        . /opt/init-src/z/z.sh
-      fi
-    #+END_SRC
-
 *** homeshick
 
     I often use [[https://github.com/andsens/homeshick][homeshick]] to manage my dot files. From the homeshick
