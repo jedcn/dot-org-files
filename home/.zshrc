@@ -33,13 +33,6 @@ function cless () {
 
 alias cl=cless
 
-alias v='vagrant'
-alias vu='vagrant up'
-alias vs='vagrant ssh'
-alias vd='vagrant destroy'
-alias vp='vagrant provision'
-alias vh='vagrant halt'
-
 unalias g
 
 g() {

@@ -136,20 +136,6 @@
       alias cl=cless
     #+END_SRC
 
-*** Vagrant
-
-    These aliases are meant to reduce common vagrant commands to two
-    characters.
-
-    #+BEGIN_SRC sh :tangle ../home/.zshrc
-      alias v='vagrant'
-      alias vu='vagrant up'
-      alias vs='vagrant ssh'
-      alias vd='vagrant destroy'
-      alias vp='vagrant provision'
-      alias vh='vagrant halt'
-    #+END_SRC
-
 *** Git
 
     I used to eschew aliases from the official oh-my-zsh git plugin,
