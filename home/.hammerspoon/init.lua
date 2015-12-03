@@ -17,8 +17,8 @@ function changeFocusedWindow(changes, msg)
   local desktop = screen:frame()
   local screenWidth = desktop.w
   local screenHeight = desktop.h
-  local smallestX = desktop.x
-  local smallestY = desktop.y
+  local smallestX = desktop.x -- 0 if no dock on left
+  local smallestY = desktop.y -- 23 because of apple bar across top
 
   local percentOfWidth = first(changes.offsetFromLeft, 0)
   local percentOfHeight = first(changes.offsetFromTop, 0)
