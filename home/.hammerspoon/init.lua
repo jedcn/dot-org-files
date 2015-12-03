@@ -12,19 +12,6 @@ function changeFocusedWindow(changes, msg)
   local win = hs.window.focusedWindow()
   local screen = win:screen()
 
-  -- desktop represents the x, y offsets and height and width of the
-  -- entire screen.
-  --
-  -- The "(0,0)" point in the desktop coordinate system is the
-  -- upper-left hand corner. A larger x is further right. A larger y
-  -- is closer to the bottom.
-  --
-  -- desktop.x is likely 0. It could be non-zero if you "dock" on the
-  -- left.
-  --
-  -- desktop.y is likely some small amount, like 23. This non-zero
-  -- amount is the size of the ever present MacOS menu bar.
-  --
   -- The desktop.width and desktop.height vary depending on screen. An
   -- example is 1440 and 873
   local desktop = screen:frame()

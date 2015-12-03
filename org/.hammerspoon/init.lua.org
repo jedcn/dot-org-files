@@ -1,123 +1,175 @@
-* Getting Started
+* Hammerspoon
 
-  #+BEGIN_SRC lua :tangle ../../home/.hammerspoon/init.lua
-    -- disable window move animations
-    hs.window.animationDuration = 0
+  I started using Hammerspoon for window management.
 
-    -- a || b
-    function first(a, b)
-      if a then return a end
-      return b
-    end
+** Window Management
 
-    function changeFocusedWindow(changes, msg)
-      local win = hs.window.focusedWindow()
-      local screen = win:screen()
+   This setup mirrors my former Slate configuration, described here:
 
-      -- desktop represents the x, y offsets and height and width of the
-      -- entire screen.
-      --
-      -- The "(0,0)" point in the desktop coordinate system is the
-      -- upper-left hand corner. A larger x is further right. A larger y
-      -- is closer to the bottom.
-      --
-      -- desktop.x is likely 0. It could be non-zero if you "dock" on the
-      -- left.
-      --
-      -- desktop.y is likely some small amount, like 23. This non-zero
-      -- amount is the size of the ever present MacOS menu bar.
-      --
-      -- The desktop.width and desktop.height vary depending on screen. An
-      -- example is 1440 and 873
-      local desktop = screen:frame()
-      local screenWidth = desktop.w
-      local screenHeight = desktop.h
-      local smallestX = desktop.x
-      local smallestY = desktop.y
+   https://github.com/jedcn/getting-started-with-slate/
 
-      local percentOfWidth = first(changes.offsetFromLeft, 0)
-      local percentOfHeight = first(changes.offsetFromTop, 0)
-      local widthRatio = first(changes.widthRatio, 1)
-      local heightRatio = first(changes.heightRatio, 1)
+** Details
 
-      local f = win:frame()
+   I like my Windows to SNAP, and so we turn off animation:
 
-      f.x = smallestX + (screenWidth * percentOfWidth)
-      f.y = smallestY + (screenHeight * percentOfHeight)
-      f.w = screenWidth * widthRatio
-      f.h = screenHeight * heightRatio
-      hs.alert.show(msg)
-      win:setFrame(f)
-    end
+   #+BEGIN_SRC lua :tangle ../../home/.hammerspoon/init.lua
+     -- disable window move animations
+     hs.window.animationDuration = 0
+  #+END_SRC
 
-    local HALF_HEIGHT = 0.5
-    local HALF_WIDTH = 0.5
-    local HALF_OF_SCREEN = 0.5
+   I am new to lua, and could not easily see how to do the equivalent
+   of =a || b= from JavaScript, so I made this =first= function.
 
-    local windowMgmtSetup = {
-      {
-        key = 'U',
-        name = 'Upper Left',
-        values = { widthRatio = HALF_WIDTH,
-                   heightRatio = HALF_HEIGHT }
-      },
-      {
-        key = 'I',
-        name = 'Upper Half',
-        values = { heightRatio = HALF_HEIGHT }
-      },
-      {
-        key = 'O',
-        name = 'Upper Right',
-        values = { widthRatio = HALF_WIDTH,
-                   heightRatio = HALF_HEIGHT,
-                   offsetFromLeft = HALF_OF_SCREEN }
-      },
-      {
-        key = 'J',
-        name = 'Left Half',
-        values = { widthRatio = HALF_WIDTH },
-      },
-      {
-        key = 'K',
-        name = 'Whole Screen',
-        values = {}
-      },
-      {
-        key = 'L',
-        name = 'Right Half',
-        values = { widthRatio = HALF_WIDTH,
-                   offsetFromLeft = HALF_OF_SCREEN }
-      },
-      {
-        key = 'M',
-        name = 'Lower Left',
-        values = { widthRatio = HALF_WIDTH,
-                   heightRatio = HALF_HEIGHT,
-                   offsetFromTop = HALF_OF_SCREEN }
-      },
-      {
-        key = ',',
-        name = 'Lower Half',
-        values = { heightRatio = HALF_HEIGHT,
-                   offsetFromTop = HALF_OF_SCREEN  }
-      },
-      {
-        key = '.',
-        name = 'Lower Right',
-        values = { heightRatio = HALF_HEIGHT,
-                   widthRatio = HALF_WIDTH,
-                   offsetFromTop = HALF_OF_SCREEN,
-                   offsetFromLeft = HALF_OF_SCREEN }
-      }
-    }
+   #+BEGIN_SRC lua :tangle ../../home/.hammerspoon/init.lua
+     -- a || b
+     function first(a, b)
+       if a then return a end
+       return b
+     end
+  #+END_SRC
 
-    local windowMgmtPrefix = { "cmd", "ctrl", "shift" }
-    for i = 1, #windowMgmtSetup do
-      local setup = windowMgmtSetup[i]
-      local function moveWindow()
-        changeFocusedWindow(setup.values, setup.name)
-      end
-      hs.hotkey.bind(windowMgmtPrefix, setup.key, moveWindow)
-    end
+   This function, =changeFocusedWindow=, does the majority of the
+   work.
+
+   The desktop can be thought of as a (x,y) plane where the (0,0)
+   point in the upper left hand corner.
+
+   As x grows, you move from left to right.
+
+   As y grow, you move from top to bottom.
+
+   In practical terms, you cannot place a window so that it overlaps
+   with the Apple bar across the top. This means the smallest value of
+   y will be something like 23, represent 23 pixels worth of Apple bar
+   width.
+
+   You cannot also place a window so that it overlaps with the Dock,
+   and sometimes people put the Dock on the left. This means that x
+   might be 0 or it could be another small value.
+
+   With that background, this function takes two objects. The
+   =changes= object is expected to be a table and has defaults for all
+   keys if a key is missing. The keys are:
+
+   + =offsetFromLeft=: How much should the window be offset from the
+     left described relative to the total size of the page?
+   + =offsetFromTop=: How much should the window be offset from the
+     top described relative to the total size of the page?
+   + =widthRatio=: How much horizontal space should this window take
+     up, relative to the total available width?
+   + =heightRatio=: How much vertical space should this window take
+     up, relative to the total available height?
+
+   #+BEGIN_SRC lua :tangle ../../home/.hammerspoon/init.lua
+     function changeFocusedWindow(changes, msg)
+       local win = hs.window.focusedWindow()
+       local screen = win:screen()
+
+       -- The desktop.width and desktop.height vary depending on screen. An
+       -- example is 1440 and 873
+       local desktop = screen:frame()
+       local screenWidth = desktop.w
+       local screenHeight = desktop.h
+       local smallestX = desktop.x
+       local smallestY = desktop.y
+
+       local percentOfWidth = first(changes.offsetFromLeft, 0)
+       local percentOfHeight = first(changes.offsetFromTop, 0)
+       local widthRatio = first(changes.widthRatio, 1)
+       local heightRatio = first(changes.heightRatio, 1)
+
+       local f = win:frame()
+
+       f.x = smallestX + (screenWidth * percentOfWidth)
+       f.y = smallestY + (screenHeight * percentOfHeight)
+       f.w = screenWidth * widthRatio
+       f.h = screenHeight * heightRatio
+       hs.alert.show(msg)
+       win:setFrame(f)
+     end
+   #+END_SRC
+
+   Given the function above, we can describe a few constants that make
+   it easier to reason about.
+
+   And we can create a data structure that describes how we want
+   keybindings setup.
+
+   #+BEGIN_SRC lua :tangle ../../home/.hammerspoon/init.lua
+     local HALF_HEIGHT = 0.5
+     local HALF_WIDTH = 0.5
+     local HALF_OF_SCREEN = 0.5
+
+     local windowMgmtSetup = {
+       {
+         key = 'U',
+         name = 'Upper Left',
+         values = { widthRatio = HALF_WIDTH,
+                    heightRatio = HALF_HEIGHT }
+       },
+       {
+         key = 'I',
+         name = 'Upper Half',
+         values = { heightRatio = HALF_HEIGHT }
+       },
+       {
+         key = 'O',
+         name = 'Upper Right',
+         values = { widthRatio = HALF_WIDTH,
+                    heightRatio = HALF_HEIGHT,
+                    offsetFromLeft = HALF_OF_SCREEN }
+       },
+       {
+         key = 'J',
+         name = 'Left Half',
+         values = { widthRatio = HALF_WIDTH },
+       },
+       {
+         key = 'K',
+         name = 'Whole Screen',
+         values = {}
+       },
+       {
+         key = 'L',
+         name = 'Right Half',
+         values = { widthRatio = HALF_WIDTH,
+                    offsetFromLeft = HALF_OF_SCREEN }
+       },
+       {
+         key = 'M',
+         name = 'Lower Left',
+         values = { widthRatio = HALF_WIDTH,
+                    heightRatio = HALF_HEIGHT,
+                    offsetFromTop = HALF_OF_SCREEN }
+       },
+       {
+         key = ',',
+         name = 'Lower Half',
+         values = { heightRatio = HALF_HEIGHT,
+                    offsetFromTop = HALF_OF_SCREEN  }
+       },
+       {
+         key = '.',
+         name = 'Lower Right',
+         values = { heightRatio = HALF_HEIGHT,
+                    widthRatio = HALF_WIDTH,
+                    offsetFromTop = HALF_OF_SCREEN,
+                    offsetFromLeft = HALF_OF_SCREEN }
+       }
+     }
+
+   #+END_SRC
+
+   Finally, given the data structure above, we can iterate through it
+   and set everything up.
+
+   #+BEGIN_SRC lua :tangle ../../home/.hammerspoon/init.lua
+     local windowMgmtPrefix = { "cmd", "ctrl", "shift" }
+     for i = 1, #windowMgmtSetup do
+       local setup = windowMgmtSetup[i]
+       local function moveWindow()
+         changeFocusedWindow(setup.values, setup.name)
+       end
+       hs.hotkey.bind(windowMgmtPrefix, setup.key, moveWindow)
+     end
   #+END_SRC
