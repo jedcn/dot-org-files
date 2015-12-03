@@ -178,3 +178,35 @@
         hs.hotkey.bind(windowMgmtPrefix, setup.key, moveWindow)
       end
    #+END_SRC
+
+
+** Miscellaneous
+
+*** WIFI
+
+    Display "Wifi: <SSID>" whenever you connect, and "Wifi:
+    Disconnected" if you disconnect.
+
+    #+BEGIN_SRC lua :tangle ../../home/.hammerspoon/init.lua
+      function alertOnSSIDChange()
+         newSSID = hs.wifi.currentNetwork()
+         if newSSID then
+            hs.alert.show("Wifi: " .. newSSID)
+         else
+            hs.alert.show("Wifi: Disconnected")
+         end
+      end
+      local wifiWatcher = hs.wifi.watcher.new(alertOnSSIDChange)
+      wifiWatcher:start()
+    #+END_SRC
+
+*** Reloading
+
+    Reload the Hammerspoon config when you press CTRL-CMD-SHIFT-R.
+
+    #+BEGIN_SRC lua :tangle ../../home/.hammerspoon/init.lua
+      hs.hotkey.bind({"cmd", "shift", "ctrl"}, "R", function()
+        hs.reload()
+      end)
+      hs.alert.show("Hammerspoon: Reloaded")
+    #+END_SRC

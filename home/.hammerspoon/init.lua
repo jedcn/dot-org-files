@@ -105,3 +105,19 @@ for i = 1, #windowMgmtSetup do
   end
   hs.hotkey.bind(windowMgmtPrefix, setup.key, moveWindow)
 end
+
+function alertOnSSIDChange()
+   newSSID = hs.wifi.currentNetwork()
+   if newSSID then
+      hs.alert.show("Wifi: " .. newSSID)
+   else
+      hs.alert.show("Wifi: Disconnected")
+   end
+end
+local wifiWatcher = hs.wifi.watcher.new(alertOnSSIDChange)
+wifiWatcher:start()
+
+hs.hotkey.bind({"cmd", "shift", "ctrl"}, "R", function()
+  hs.reload()
+end)
+hs.alert.show("Hammerspoon: Reloaded")
