@@ -1,4 +1,4 @@
-all : home/.emacs.d/init.el home/.slate home/.zshrc home/.vimrc home/.vimrc.bundles home/.oh-my-zsh/custom/jedcn.zsh-theme
+all : home/.emacs.d/init.el home/.slate home/.zshrc home/.vimrc home/.vimrc.bundles home/.oh-my-zsh/custom/jedcn.zsh-theme home/.hammerspoon/init.lua
 
 home/.emacs.d/init.el : org/.emacs.d/init.org
 		mkdir -p org/.emacs.d/org/.emacs.d/
@@ -19,3 +19,6 @@ home/.vimrc.bundles : org/vim.org
 
 home/.oh-my-zsh/custom/jedcn.zsh-theme : org/oh-my-zsh/custom/jedcn.zsh-theme.org
 		./scripts/tangle-file.sh org/oh-my-zsh/custom/jedcn.zsh-theme.org
+
+home/.hammerspoon/init.lua : org/.hammerspoon/init.lua.org
+		./scripts/tangle-file.sh org/.hammerspoon/init.lua.org
