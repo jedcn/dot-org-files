@@ -31,6 +31,24 @@ function changeFocusedWindow(changes, msg)
   f.y = smallestY + (screenHeight * percentOfHeight)
   f.w = screenWidth * widthRatio
   f.h = screenHeight * heightRatio
+
+  if changes.shrinkOrGrow then
+     -- Shrink or Growth the Width..
+     oldWidth = f.w
+     changeInWidth = changes.shrinkOrGrow * oldWidth
+     newWidth = oldWidth + changeInWidth
+     f.w = newWidth
+
+     oldHeight = f.h
+     changeInHeight = changes.shrinkOrGrow * oldHeight
+     newHeight = oldHeight + changeInHeight
+     f.h = newHeight
+
+     -- Re-center
+     f.x = f.x - (changeInWidth / 2)
+     f.y = f.y - (changeInHeight / 2)
+  end
+
   hs.alert.show(msg)
   win:setFrame(f)
 end
@@ -42,21 +60,21 @@ local HALF_OF_SCREEN = 0.5
 local windowMgmtSetup = {
   {
     key = 'U',
-    name = 'Upper Left',
+    name = 'Smaller Left Half',
     values = { widthRatio = HALF_WIDTH,
-               heightRatio = HALF_HEIGHT }
+               shrinkOrGrow = -0.1 },
   },
   {
     key = 'I',
-    name = 'Upper Half',
-    values = { heightRatio = HALF_HEIGHT }
+    name = 'Smaller Whole Screen',
+    values = { shrinkOrGrow = -0.1 }
   },
   {
     key = 'O',
-    name = 'Upper Right',
+    name = 'Smaller Right Half',
     values = { widthRatio = HALF_WIDTH,
-               heightRatio = HALF_HEIGHT,
-               offsetFromLeft = HALF_OF_SCREEN }
+               offsetFromLeft = HALF_OF_SCREEN,
+               shrinkOrGrow = -0.1 }
   },
   {
     key = 'J',
