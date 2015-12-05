@@ -1,4 +1,9 @@
 
+hs.hotkey.bind({"cmd", "shift", "ctrl"}, "R", function()
+  hs.reload()
+end)
+hs.alert.show("Hammerspoon: Online")
+
 -- disable window move animations
 hs.window.animationDuration = 0
 
@@ -133,8 +138,3 @@ function alertOnSSIDChange()
 end
 local wifiWatcher = hs.wifi.watcher.new(alertOnSSIDChange)
 wifiWatcher:start()
-
-hs.hotkey.bind({"cmd", "shift", "ctrl"}, "R", function()
-  hs.reload()
-end)
-hs.alert.show("Hammerspoon: Online")

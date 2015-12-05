@@ -2,6 +2,21 @@
 
   I started using Hammerspoon for window management.
 
+** Reloading
+
+   Before we get going, we setup how to reload.
+
+   It is helpful that this appears first in the file. This placement
+   ensures that you will always be able to reload. This is especially
+   helpful if you introduce an error below that halts reloading.
+
+   #+BEGIN_SRC lua :tangle ../../home/.hammerspoon/init.lua
+     hs.hotkey.bind({"cmd", "shift", "ctrl"}, "R", function()
+       hs.reload()
+     end)
+     hs.alert.show("Hammerspoon: Online")
+    #+END_SRC
+
 ** Window Management
 
    This setup used to mirror my former Slate configuration, described
@@ -224,15 +239,4 @@
       end
       local wifiWatcher = hs.wifi.watcher.new(alertOnSSIDChange)
       wifiWatcher:start()
-    #+END_SRC
-
-*** Reloading
-
-    Reload the Hammerspoon config when you press CTRL-CMD-SHIFT-R.
-
-    #+BEGIN_SRC lua :tangle ../../home/.hammerspoon/init.lua
-      hs.hotkey.bind({"cmd", "shift", "ctrl"}, "R", function()
-        hs.reload()
-      end)
-      hs.alert.show("Hammerspoon: Online")
     #+END_SRC
