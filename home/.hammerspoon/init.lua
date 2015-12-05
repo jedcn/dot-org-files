@@ -101,9 +101,8 @@ local windowMgmtSetup = {
   },
   {
     key = ',',
-    name = 'Lower Half',
-    values = { heightRatio = HALF_HEIGHT,
-               offsetFromTop = HALF_OF_SCREEN  }
+    name = 'Smallest Whole Screen',
+    values = { shrinkOrGrow = -0.3 }
   },
   {
     key = '.',
