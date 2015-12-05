@@ -17,17 +17,56 @@
      hs.alert.show("Hammerspoon: Online")
     #+END_SRC
 
-** Window Management
+** Simpler Window Management
 
-   This setup used to mirror my former Slate configuration, described
-   here:
+   I am trying the following (on MacOS):
 
-   https://github.com/jedcn/getting-started-with-slate/
+   1. Applications associated with any single "Project" live in a
+      single "Desktop."
+   2. By "Desktop" I mean the things you see when you press F3. The
+      things you can switch between by pressing =CTRL-LEFT_ARROW= and
+      =CTRL-RIGHT_ARROW=.
+   3. By "Project" I mean a functional task that you work on: Work
+      Email, Work Chat, Personal Email, Personal Chat, Music, Editor,
+      Terminal, Editor and Terminal. This list constitutes 8 Projects
+      and, in turn, 8 Desktops.
+   4. If you are liberal with the amount of Desktops you create then
+      each Desktop will have just a few Applications.
+   5. Perhaps you do not need a powerful "tiling" Window Management
+      System.
+   6. Perhaps you will be able to manage just one or two windows.
 
-   But no longer. Now the topmost row (=U=, =I=, =O=) does something
-   similar to the homerow (=J=, =K=, =L=). However, these top row keys
-   slightly shrink the window being placed. This creates a visual
-   border between these windows and leaves things less cluttered.
+   With this in mind, the following keybindings are setup to follow
+   [[https://github.com/jedcn/getting-started-with-slate/blob/master/README.md#size-and-placement][the mnemonic of the "numpad:"]]
+
+   The homerow (=J=, =K=, =L=) represents the most popular
+   keybindings. When =CMD-CTRL-SHIFT= is pressed with these keys you
+   will make the currently focused window take up:
+
+   1. The left 1/2 of the screen
+   2. The whole screen
+   3. The right 1/2 of the screen
+
+   If you are using a big monitor or you like to see some visual space
+   between windows, you can use the topmost row (=U=, =I=, =O=). It
+   will make the currently focused window take up:
+
+   1. 90% of the left 1/2 of the screen
+   2. 90% of the whole screen
+   3. 90% of the right 1/2 of the screen
+
+   And finally, if you use the lowest row (=m=, =,=, =.=) it will make
+   the currently focused window take up:
+
+   1. 80% of the whole screen
+   2. 70% of the whole screen
+   3. 60% of the whole screen
+
+   The thinking with this row is that when you are using a very large
+   monitor you want to focus your line of sight and gaze at the center
+   of the monitor. If any single application takes up too much
+   geographic real estate, you will end up looking at the corner of
+   your monitor too frequently.
 
 *** Details
 
@@ -145,18 +184,18 @@
       local windowMgmtSetup = {
         {
           key = 'U',
-          name = 'Smaller Left Half',
+          name = '90% of Left Half',
           values = { widthRatio = HALF_WIDTH,
                      shrinkOrGrow = -0.1 },
         },
         {
           key = 'I',
-          name = 'Smaller Whole Screen',
+          name = '90% of Whole Screen',
           values = { shrinkOrGrow = -0.1 }
         },
         {
           key = 'O',
-          name = 'Smaller Right Half',
+          name = '90% of Right Half',
           values = { widthRatio = HALF_WIDTH,
                      offsetFromLeft = HALF_OF_SCREEN,
                      shrinkOrGrow = -0.1 }
@@ -179,23 +218,18 @@
         },
         {
           key = 'M',
-          name = 'Lower Left',
-          values = { widthRatio = HALF_WIDTH,
-                     heightRatio = HALF_HEIGHT,
-                     offsetFromTop = HALF_OF_SCREEN }
+          name = '80% of Whole Screen',
+          values = { shrinkOrGrow = -0.20 }
         },
         {
           key = ',',
-          name = 'Smallest Whole Screen',
+          name = '70% of Whole Screen',
           values = { shrinkOrGrow = -0.3 }
         },
         {
           key = '.',
-          name = 'Lower Right',
-          values = { heightRatio = HALF_HEIGHT,
-                     widthRatio = HALF_WIDTH,
-                     offsetFromTop = HALF_OF_SCREEN,
-                     offsetFromLeft = HALF_OF_SCREEN }
+          name = '60% of Whole Screen',
+          values = { shrinkOrGrow = -0.4 }
         }
       }
 

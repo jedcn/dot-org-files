@@ -65,18 +65,18 @@ local HALF_OF_SCREEN = 0.5
 local windowMgmtSetup = {
   {
     key = 'U',
-    name = 'Smaller Left Half',
+    name = '90% of Left Half',
     values = { widthRatio = HALF_WIDTH,
                shrinkOrGrow = -0.1 },
   },
   {
     key = 'I',
-    name = 'Smaller Whole Screen',
+    name = '90% of Whole Screen',
     values = { shrinkOrGrow = -0.1 }
   },
   {
     key = 'O',
-    name = 'Smaller Right Half',
+    name = '90% of Right Half',
     values = { widthRatio = HALF_WIDTH,
                offsetFromLeft = HALF_OF_SCREEN,
                shrinkOrGrow = -0.1 }
@@ -99,23 +99,18 @@ local windowMgmtSetup = {
   },
   {
     key = 'M',
-    name = 'Lower Left',
-    values = { widthRatio = HALF_WIDTH,
-               heightRatio = HALF_HEIGHT,
-               offsetFromTop = HALF_OF_SCREEN }
+    name = '80% of Whole Screen',
+    values = { shrinkOrGrow = -0.20 }
   },
   {
     key = ',',
-    name = 'Smallest Whole Screen',
+    name = '70% of Whole Screen',
     values = { shrinkOrGrow = -0.3 }
   },
   {
     key = '.',
-    name = 'Lower Right',
-    values = { heightRatio = HALF_HEIGHT,
-               widthRatio = HALF_WIDTH,
-               offsetFromTop = HALF_OF_SCREEN,
-               offsetFromLeft = HALF_OF_SCREEN }
+    name = '60% of Whole Screen',
+    values = { shrinkOrGrow = -0.4 }
   }
 }
 
