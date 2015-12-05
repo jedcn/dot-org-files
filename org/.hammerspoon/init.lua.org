@@ -235,5 +235,5 @@
       hs.hotkey.bind({"cmd", "shift", "ctrl"}, "R", function()
         hs.reload()
       end)
-      hs.alert.show("Hammerspoon: Reloaded")
+      hs.alert.show("Hammerspoon: Online")
     #+END_SRC
