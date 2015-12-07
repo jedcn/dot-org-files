@@ -23,38 +23,30 @@
 (setq magit-last-seen-setup-instructions "1.4.0")
 (require 'magit)
 
-(global-set-key (kbd "M-g") 'magit-status)
+(defun magit-status-fullscreen (prefix)
+  (interactive "P")
+  (magit-status)
+  (unless prefix
+    (delete-other-windows)))
 
-(defadvice magit-status (around magit-fullscreen activate)
-  (window-configuration-to-register :magit-fullscreen)
-  ad-do-it
-  (delete-other-windows))
+(global-set-key (kbd "C-x m") 'magit-status-fullscreen)
+(autoload 'magit-status-fullscreen "magit")
 
-(defun magit-quit-session ()
-  "Restores the previous window configuration and kills the magit buffer"
+(defun vc-annotate-quit ()
+  "Restores the previous window configuration and kills the vc-annotate buffer"
   (interactive)
   (kill-buffer)
-  (jump-to-register :magit-fullscreen))
+  (jump-to-register :vc-annotate-fullscreen))
 
-(define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
+(eval-after-load "vc-annotate"
+  '(progn
+     (defadvice vc-annotate (around fullscreen activate)
+       (window-configuration-to-register :vc-annotate-fullscreen)
+       ad-do-it
+       (delete-other-windows))
+     (define-key vc-annotate-mode-map (kbd "q") 'vc-annotate-quit)))
 
-(defun magit-toggle-whitespace ()
-  (interactive)
-  (if (member "-w" magit-diff-options)
-      (magit-dont-ignore-whitespace)
-    (magit-ignore-whitespace)))
-
-(defun magit-ignore-whitespace ()
-  (interactive)
-  (add-to-list 'magit-diff-options "-w")
-  (magit-refresh))
-
-(defun magit-dont-ignore-whitespace ()
-  (interactive)
-  (setq magit-diff-options (remove "-w" magit-diff-options))
-  (magit-refresh))
-
-(define-key magit-status-mode-map (kbd "W") 'magit-toggle-whitespace)
+(defalias 'jedcn-git-blame 'vc-annotate)
 
 (setq magit-diff-refine-hunk 'all)
 

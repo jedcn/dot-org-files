@@ -58,48 +58,40 @@
      (require 'magit)
    #+END_SRC
 
-   Start magit with M-g. Magit will be full screen. Press "q" when you
-   are done, and magit will be dismissed and what you were previously
-   looking at will be restored.
+   Start magit with C-x m. Magit will be full screen. Press "q" when
+   you are done, and magit will be dismissed and what you were
+   previously looking at will be restored.
 
    #+BEGIN_SRC emacs-lisp
-     (global-set-key (kbd "M-g") 'magit-status)
+     (defun magit-status-fullscreen (prefix)
+       (interactive "P")
+       (magit-status)
+       (unless prefix
+         (delete-other-windows)))
 
-     (defadvice magit-status (around magit-fullscreen activate)
-       (window-configuration-to-register :magit-fullscreen)
-       ad-do-it
-       (delete-other-windows))
-
-     (defun magit-quit-session ()
-       "Restores the previous window configuration and kills the magit buffer"
-       (interactive)
-       (kill-buffer)
-       (jump-to-register :magit-fullscreen))
-
-     (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
+     (global-set-key (kbd "C-x m") 'magit-status-fullscreen)
+     (autoload 'magit-status-fullscreen "magit")
    #+END_SRC
 
-   Press "w" while to toggle whether or not whitespace differences are
-   shown in magit diff.
+   We can do the same idea with =vc-annotate=. I never remember the
+   name of this-- so I provide an alias.
 
    #+BEGIN_SRC emacs-lisp
-     (defun magit-toggle-whitespace ()
+     (defun vc-annotate-quit ()
+       "Restores the previous window configuration and kills the vc-annotate buffer"
        (interactive)
-       (if (member "-w" magit-diff-options)
-           (magit-dont-ignore-whitespace)
-         (magit-ignore-whitespace)))
+       (kill-buffer)
+       (jump-to-register :vc-annotate-fullscreen))
 
-     (defun magit-ignore-whitespace ()
-       (interactive)
-       (add-to-list 'magit-diff-options "-w")
-       (magit-refresh))
+     (eval-after-load "vc-annotate"
+       '(progn
+          (defadvice vc-annotate (around fullscreen activate)
+            (window-configuration-to-register :vc-annotate-fullscreen)
+            ad-do-it
+            (delete-other-windows))
+          (define-key vc-annotate-mode-map (kbd "q") 'vc-annotate-quit)))
 
-     (defun magit-dont-ignore-whitespace ()
-       (interactive)
-       (setq magit-diff-options (remove "-w" magit-diff-options))
-       (magit-refresh))
-
-     (define-key magit-status-mode-map (kbd "W") 'magit-toggle-whitespace)
+     (defalias 'jedcn-git-blame 'vc-annotate)
    #+END_SRC
 
    Highlight fine differences within changed lines:
