@@ -8,20 +8,8 @@
     ;;
   #+END_SRC
 
-  If this file is placed at =~/.emacs.d/init.org=, you can make
-  changes to it and load those changes into your session (temporarily)
-  by pressing =C-c i=:
-
-  #+BEGIN_SRC emacs-lisp
-    (global-set-key (kbd "C-c i")
-                    (lambda()
-                      (interactive)
-                      (org-babel-load-file "~/.emacs.d/init.org")))
-  #+END_SRC
-
-  When you like what you've got, you can make things permanent by
-  running a =make=. This file will be transformed into =init.el= and
-  you should commit both of them.
+  This file is translated into =init.el= when you run the command
+  =make=. Both this file and the generated file are committed.
 
 * System Integration
 

@@ -5,11 +5,6 @@
 ;; It is generated from init.org
 ;;
 
-(global-set-key (kbd "C-c i")
-                (lambda()
-                  (interactive)
-                  (org-babel-load-file "~/.emacs.d/init.org")))
-
 (setq jedcn-explicit-env-path
       (concat "/opt/boxen/rbenv/shims:/opt/boxen/nodenv/shims:"
               "/usr/bin:/bin:/usr/sbin:/sbin:"
