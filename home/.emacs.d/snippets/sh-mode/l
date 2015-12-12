@@ -1,0 +1,4 @@
+# -*- mode: sh; require-final-newline: nil; backup-inhibited: t -*-
+#name: echo "variable $variable"
+# --
+echo "$1: '\$${1:var}'"$0
