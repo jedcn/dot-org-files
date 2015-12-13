@@ -54,6 +54,8 @@ alias gdom='git diff origin/master'
 alias gpom='git push origin master'
 alias grom='git reset --hard origin/master'
 
+alias gdu='git diff $(git rev-parse --symbolic-full-name @{u})'
+
 function gcob () {
   origin_branch_name=$1
   branch_name_without_origin=$(echo $origin_branch_name | sed 's/origin\///')

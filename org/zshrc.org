@@ -213,6 +213,16 @@
        alias grom='git reset --hard origin/master'
      #+END_SRC
 
+     I commonly set an upstream for a branch that I am working on, and
+     I want to ask, "What are the differences between what I have
+     locally and what is upstream?"
+
+     And so, =gdu= is remembered as "git diff (against) upstream":
+
+     #+BEGIN_SRC sh :tangle ../home/.zshrc
+       alias gdu='git diff $(git rev-parse --symbolic-full-name @{u})'
+     #+END_SRC
+
 **** gcob
 
      A shortcut for =git checkout -b= when you want a local branch
