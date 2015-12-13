@@ -15,6 +15,11 @@ end
 
 function changeFocusedWindow(changes, msg)
   local win = hs.window.focusedWindow()
+  if not win then
+     hs.alert.show('No window has focus.')
+     return
+  end
+
   local screen = win:screen()
 
   -- The desktop.width and desktop.height vary depending on screen. An
