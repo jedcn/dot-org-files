@@ -54,6 +54,7 @@ alias gdom='git diff origin/master'
 alias gpom='git push origin master'
 alias grom='git reset --hard origin/master'
 
+alias gsu='git branch --set-upstream-to '
 alias gdu='git diff $(git rev-parse --symbolic-full-name @{u})'
 
 function gcob () {

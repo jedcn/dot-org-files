@@ -213,13 +213,17 @@
        alias grom='git reset --hard origin/master'
      #+END_SRC
 
-     I commonly set an upstream for a branch that I am working on, and
-     I want to ask, "What are the differences between what I have
-     locally and what is upstream?"
+     If not working against master, my other approach to git work is
+     to work around an upstream.
 
-     And so, =gdu= is remembered as "git diff (against) upstream":
+     In most cases, I setup an upstream with =gcob= (see below). If I
+     did not start off that way, I use =gsu= to do "git setup
+     upstream." Once that is in place, when I want to ask "What are
+     the differences between what I have locally and what is
+     upstream?" Then I use =gdu= to do "git diff (against) upstream":
 
      #+BEGIN_SRC sh :tangle ../home/.zshrc
+       alias gsu='git branch --set-upstream-to '
        alias gdu='git diff $(git rev-parse --symbolic-full-name @{u})'
      #+END_SRC
 
