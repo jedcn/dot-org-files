@@ -86,7 +86,7 @@ ghroving-remote-add() {
   git remote add $1 https://github.roving.com/$1/$2.git
 }
 
-export RBENV_VERSION=2.1.2
+export RBENV_VERSION=2.2.3
 
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"

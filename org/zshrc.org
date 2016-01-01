@@ -315,12 +315,13 @@
 
 *** RBENV
 
-    I have started using [[https://github.com/sstephenson/rbenv][rbenv]] to manage my rubies. My projects have a
-    =.ruby-version= which informs rbenv, and I also use an environment
-    variable to declare the default ruby if I'm not in a project:
+    I have started using [[https://github.com/sstephenson/rbenv][rbenv]] to manage my rubies. It takes a ruby
+    version from RBENV_VERSION. I also add a =.ruby-version= to my
+    projects to remind myself of what =RBENV_VERSION= was when I
+    created the project.
 
     #+BEGIN_SRC sh :tangle ../home/.zshrc
-      export RBENV_VERSION=2.1.2
+      export RBENV_VERSION=2.2.3
     #+END_SRC
 
 *** RVM
