@@ -130,6 +130,19 @@
      (setq js-indent-level 2)
    #+END_SRC
 
+** web-mode
+
+   Each level should be indented 2 spaces:
+
+   #+BEGIN_SRC emacs-lisp
+     (defun my-web-mode-hook ()
+       "Hooks for Web mode."
+       (setq web-mode-markup-indent-offset 2)
+       (setq web-mode-css-indent-offset 2)
+       (setq web-mode-code-indent-offset 2))
+     (add-hook 'web-mode-hook  'my-web-mode-hook)
+   #+END_SRC
+
 ** flycheck
 
    #+BEGIN_SRC emacs-lisp
