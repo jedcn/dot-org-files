@@ -130,3 +130,8 @@ fi
 if [ -x "/opt/boxen/nodenv/bin/nodenv" ]; then
   eval "(nodenv init -)"
 fi
+
+if [ -f ~/src/wayfair-dot-files/wayfair.sh ];
+then
+  source ~/src/wayfair-dot-files/wayfair.sh
+fi

@@ -455,3 +455,22 @@
         eval "(nodenv init -)"
       fi
     #+END_SRC
+
+** Extensions
+
+   These are my public dot files.
+
+   However, some functions and aliases are not meant for public
+   consumption.
+
+   I keep everything in source control, but not everything is on
+   https://github.com/jedcn.
+
+*** Wayfair
+
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      if [ -f ~/src/wayfair-dot-files/wayfair.sh ];
+      then
+        source ~/src/wayfair-dot-files/wayfair.sh
+      fi
+    #+END_SRC
