@@ -35,7 +35,7 @@
     (setenv "NODENV_VERSION" "v0.10")
   #+END_SRC
 
-* Packages
+* Packages and Modes
 
 ** Cask
 
@@ -136,7 +136,7 @@
 
    #+BEGIN_SRC emacs-lisp
      (defun my-web-mode-hook ()
-       "Hooks for Web mode."
+       "Hooks for web-mode."
        (setq web-mode-markup-indent-offset 2)
        (setq web-mode-css-indent-offset 2)
        (setq web-mode-code-indent-offset 2))
@@ -229,6 +229,16 @@
      (setq yas-snippet-dirs
            (concat user-emacs-directory "snippets"))
      (yas-global-mode 1)
+   #+END_SRC
+
+** sh-mode
+
+   #+BEGIN_SRC emacs-lisp
+     (defun my-sh-mode-hook ()
+       "Hook for sh-mode."
+       (setq sh-basic-offset 2
+             sh-indentation 2))
+     (add-hook 'sh-mode-hook  'my-sh-mode-hook)
    #+END_SRC
 
 * Basics

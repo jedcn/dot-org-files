@@ -101,6 +101,12 @@
       (concat user-emacs-directory "snippets"))
 (yas-global-mode 1)
 
+(defun my-sh-mode-hook ()
+  "Hook for sh-mode."
+  (setq sh-basic-offset 2
+        sh-indentation 2))
+(add-hook 'sh-mode-hook  'my-sh-mode-hook)
+
 (setq mac-command-modifier 'meta)
 
 (define-key global-map (kbd "C-+") 'text-scale-increase)
