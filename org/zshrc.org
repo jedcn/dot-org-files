@@ -210,7 +210,8 @@
        alias gcom='git checkout master'
        alias gdom='git diff origin/master'
        alias gpom='git push origin master'
-       alias grom='git reset --hard origin/master'
+       alias grom='git reset origin/master'
+       alias grhom='git reset --hard origin/master'
      #+END_SRC
 
      If not working against master, my other approach to git work is
@@ -220,11 +221,15 @@
      did not start off that way, I use =gsu= to do "git setup
      upstream." Once that is in place, when I want to ask "What are
      the differences between what I have locally and what is
-     upstream?" Then I use =gdu= to do "git diff (against) upstream":
+     upstream?" Then I use =gdu= to do "git diff (against)
+     upstream". I can also use =gru= and =grhu= for "git reset [hard]
+     against upstream":
 
      #+BEGIN_SRC sh :tangle ../home/.zshrc
        alias gsu='git branch --set-upstream-to '
        alias gdu='git diff $(git rev-parse --symbolic-full-name @{u})'
+       alias gru='git reset $(git rev-parse --symbolic-full-name @{u})'
+       alias grhu='git reset --hard $(git rev-parse --symbolic-full-name @{u})'
      #+END_SRC
 
 **** gcob
