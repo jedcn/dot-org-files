@@ -322,17 +322,6 @@
 
 ** Misc
 
-*** RBENV
-
-    I have started using [[https://github.com/sstephenson/rbenv][rbenv]] to manage my rubies. It takes a ruby
-    version from RBENV_VERSION. I also add a =.ruby-version= to my
-    projects to remind myself of what =RBENV_VERSION= was when I
-    created the project.
-
-    #+BEGIN_SRC sh :tangle ../home/.zshrc
-      export RBENV_VERSION=2.2.3
-    #+END_SRC
-
 *** RVM
 
     I sometimes still use RVM to manage my Rubies. At the end of the
@@ -366,17 +355,6 @@
         echo ${PROJECT_NAME} > .ruby-gemset
         echo "2.1.0" > .ruby-version
       }
-    #+END_SRC
-
-*** NodeEnv
-
-    I have started using nodenv to manage my nodes. Just like rbenv,
-    my projects call out which version of node they'd like via a
-    =.node-version= file, but I also supply a default via an
-    environment variable:
-
-    #+BEGIN_SRC sh :tangle ../home/.zshrc
-      export NODENV_VERSION=4.1.1
     #+END_SRC
 
 *** Java
@@ -460,6 +438,30 @@
         eval "(nodenv init -)"
       fi
     #+END_SRC
+
+**** NODEENV
+
+     I have started using nodenv to manage my nodes. Just like rbenv,
+     my projects call out which version of node they'd like via a
+     =.node-version= file, but I also supply a default via an
+     environment variable:
+
+     #+BEGIN_SRC sh :tangle ../home/.zshrc
+       LATEST_NODENV_VERSION=$(nodenv versions | tail -1 | sed 's/ //g')
+       export NODENV_VERSION=$LATEST_NODENV_VERSION
+     #+END_SRC
+
+**** RBENV
+
+     I have started using [[https://github.com/sstephenson/rbenv][rbenv]] to manage my rubies. It takes a ruby
+     version from RBENV_VERSION. I also add a =.ruby-version= to my
+     projects to remind myself of what =RBENV_VERSION= was when I
+     created the project.
+
+     #+BEGIN_SRC sh :tangle ../home/.zshrc
+       LATEST_RBENV_VERSION=$(rbenv versions | tail -1 | sed 's/* //' | sed 's/ .*$//')
+       export RBENV_VERSION=$LATEST_RBENV_VERSION
+     #+END_SRC
 
 ** Extensions
 

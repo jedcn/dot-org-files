@@ -90,8 +90,6 @@ ghroving-remote-add() {
   git remote add $1 https://github.roving.com/$1/$2.git
 }
 
-export RBENV_VERSION=2.2.3
-
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
@@ -102,8 +100,6 @@ function rvmi() {
   echo ${PROJECT_NAME} > .ruby-gemset
   echo "2.1.0" > .ruby-version
 }
-
-export NODENV_VERSION=4.1.1
 
 export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 
@@ -133,6 +129,12 @@ fi
 if [ -x "/opt/boxen/nodenv/bin/nodenv" ]; then
   eval "(nodenv init -)"
 fi
+
+LATEST_NODENV_VERSION=$(nodenv versions | tail -1 | sed 's/ //g')
+export NODENV_VERSION=$LATEST_NODENV_VERSION
+
+LATEST_RBENV_VERSION=$(rbenv versions | tail -1 | sed 's/* //' | sed 's/ .*$//')
+export RBENV_VERSION=$LATEST_RBENV_VERSION
 
 if [ -f ~/src/wayfair-dot-files/wayfair.sh ];
 then
