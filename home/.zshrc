@@ -127,7 +127,7 @@ then
 fi
 
 if [ -x "/opt/boxen/nodenv/bin/nodenv" ]; then
-  eval "(nodenv init -)"
+  eval "$(nodenv init -)"
 fi
 
 LATEST_NODENV_VERSION=$(nodenv versions | tail -1 | sed 's/ //g')

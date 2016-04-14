@@ -435,7 +435,7 @@
 
     #+BEGIN_SRC sh :tangle ../home/.zshrc
       if [ -x "/opt/boxen/nodenv/bin/nodenv" ]; then
-        eval "(nodenv init -)"
+        eval "$(nodenv init -)"
       fi
     #+END_SRC
 
