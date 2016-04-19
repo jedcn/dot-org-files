@@ -54,6 +54,8 @@
 (setq org-hide-leading-stars 'hidestars)
 (setq org-src-fontify-natively t)
 
+(setq org-hide-emphasis-markers t)
+
 (setq coffee-tab-width 2)
 
 (setq js-indent-level 2)

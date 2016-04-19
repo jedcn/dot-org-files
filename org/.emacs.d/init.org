@@ -102,16 +102,23 @@
 
 ** org
 
-   Start by showing everything in a file.
-
-   Only show "the last" star.
-
-   Syntax highlight the content in a BEGIN_SRC/END_SRC blocks.
+   * Start by showing everything in a file.
+   * Only show "the last" star.
+   * Syntax highlight the content in a BEGIN_SRC/END_SRC blocks.
 
    #+BEGIN_SRC emacs-lisp
      (setq org-startup-folded 'showeverything)
      (setq org-hide-leading-stars 'hidestars)
      (setq org-src-fontify-natively t)
+   #+END_SRC
+
+   Next up:
+
+   * If you add emphasis by surrounding with /s or you make something
+     look like code by surrounding with =s, hide the / or the =.
+
+   #+BEGIN_SRC emacs-lisp
+     (setq org-hide-emphasis-markers t)
    #+END_SRC
 
 ** coffee
