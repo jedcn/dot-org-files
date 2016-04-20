@@ -112,13 +112,33 @@
      (setq org-src-fontify-natively t)
    #+END_SRC
 
-   Next up:
-
-   * If you add emphasis by surrounding with /s or you make something
-     look like code by surrounding with =s, hide the / or the =.
+   If you add emphasis by surrounding with /s or you make something
+   look like code by surrounding with =s, hide the / or the =.
 
    #+BEGIN_SRC emacs-lisp
      (setq org-hide-emphasis-markers t)
+   #+END_SRC
+
+** Bullets
+
+   When it comes to headings and lists, we'll make them look a bit
+   nicer than default.
+
+   For headings, we'll use org-bullets:
+
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+   #+END_SRC
+
+   For lists, we'll do some font-locking:
+
+   List items made with an =*= will look like a dot. We'll leave =-= and =+=
+   alone in case we want some variety:
+
+   #+BEGIN_SRC emacs-lisp
+     (font-lock-add-keywords 'org-mode
+                             '(("^ +\\([*]\\) "
+                                (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
    #+END_SRC
 
 ** coffee

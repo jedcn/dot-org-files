@@ -11,5 +11,6 @@
 (depends-on "leuven-theme")
 (depends-on "magit")
 (depends-on "markdown-mode")
+(depends-on "org-bullets")
 (depends-on "projectile")
 (depends-on "yasnippet")
