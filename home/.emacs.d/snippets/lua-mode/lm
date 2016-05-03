@@ -1,0 +1,4 @@
+# -*- mode: lua; require-final-newline: nil; backup-inhibited: t -*-
+#name: print('message')
+# --
+print('$1')$0

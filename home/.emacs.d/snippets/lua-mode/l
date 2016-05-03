@@ -1,0 +1,4 @@
+# -*- mode: lua; require-final-newline: nil; backup-inhibited: t -*-
+#name: print.show("variable '" .. variable .. "'")
+# --
+print("$1 '" .. ${1:var} .. "'")$0
