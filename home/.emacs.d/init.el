@@ -15,8 +15,6 @@
   (setq exec-path (split-string desired-path ":")))
 (jedcn-sync-env-path-and-exec-path jedcn-explicit-env-path)
 
-(setenv "NODENV_VERSION" "v0.10")
-
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
 

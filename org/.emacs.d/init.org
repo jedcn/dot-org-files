@@ -29,12 +29,6 @@
     (jedcn-sync-env-path-and-exec-path jedcn-explicit-env-path)
   #+END_SRC
 
-  It is also helpful to set various environment variables:
-
-  #+BEGIN_SRC emacs-lisp
-    (setenv "NODENV_VERSION" "v0.10")
-  #+END_SRC
-
 * Packages and Modes
 
 ** Cask
