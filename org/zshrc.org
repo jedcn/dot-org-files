@@ -75,8 +75,6 @@
    I call out aliases in multiple places. This section contains stuff
    that otherwise wouldn't have a home.
 
-   Some things, like aliases for rvm, are down in the RVM section.
-
 *** e
 
     If you've got a running emacs, this can bring you into editing a
@@ -322,41 +320,6 @@
 
 ** Misc
 
-*** RVM
-
-    I sometimes still use RVM to manage my Rubies. At the end of the
-    RVM install, we're told to setup our ZSH with the following (it
-    does no harm if rvm isn't present):
-
-    #+BEGIN_SRC sh :tangle ../home/.zshrc
-      # RVM
-      [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-    #+END_SRC
-
-    I maintain a distinct RVM Gemset for each project on my computer,
-    and so, it's helpful to quickly understand which rvm ruby and rvm
-    gemset is currently active. Thusly, =rvmc= is born, and it's all
-    about =rvm current=.
-
-    #+BEGIN_SRC sh :tangle ../home/.zshrc
-      alias rvmc='rvm current'
-    #+END_SRC
-
-    If I'm creating a new project, or I've cloned someone else's
-    project and they don't use rvm, I'd like to quickly create a
-    =.ruby-gemset= and =.ruby-version= as an initializing step. I
-    expect that this would be run from within the root directory of
-    the project, and that directory matches the name of the
-    project. As for a mnemonic, I think of =rvmi= as rvm initialize.
-
-    #+BEGIN_SRC sh :tangle ../home/.zshrc
-      function rvmi() {
-        PROJECT_NAME=$(basename `pwd`)
-        echo ${PROJECT_NAME} > .ruby-gemset
-        echo "2.1.0" > .ruby-version
-      }
-    #+END_SRC
-
 *** Java
 
     I use the Java that comes with my MacOS. I need this setting for a
@@ -382,7 +345,6 @@
 
     + including stuff that brew gives me (/usr/local/bin)
     + including stuff that a MacTeX install gives me (/usr/texbin)
-    + including stuff that rvm gives me.
     + including stuff that a local project of mine, mrsi, gives me.
     + including stuff that npm gives me.
 
@@ -390,7 +352,6 @@
 
     #+BEGIN_SRC sh :tangle ../home/.zshrc
       export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
-      export PATH=$PATH:/Users/jnorthridge/.rvm/bin:/Users/jnorthridge/c/misc/mrsi/bin
       export PATH=$PATH:/usr/local/share/npm/bin
     #+END_SRC
 

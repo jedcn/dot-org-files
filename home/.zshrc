@@ -90,17 +90,6 @@ ghroving-remote-add() {
   git remote add $1 https://github.roving.com/$1/$2.git
 }
 
-# RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
-alias rvmc='rvm current'
-
-function rvmi() {
-  PROJECT_NAME=$(basename `pwd`)
-  echo ${PROJECT_NAME} > .ruby-gemset
-  echo "2.1.0" > .ruby-version
-}
-
 export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 
 if [ -d /Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home ];
@@ -109,7 +98,6 @@ then
 fi
 
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
-export PATH=$PATH:/Users/jnorthridge/.rvm/bin:/Users/jnorthridge/c/misc/mrsi/bin
 export PATH=$PATH:/usr/local/share/npm/bin
 
 if [ -d "$HOME/.homesick/repos/homeshick" ];
