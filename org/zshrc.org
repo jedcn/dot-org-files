@@ -344,14 +344,13 @@
     My =PATH= settings are mainly based on:
 
     + including stuff that brew gives me (/usr/local/bin)
-    + including stuff that a MacTeX install gives me (/usr/texbin)
     + including stuff that a local project of mine, mrsi, gives me.
     + including stuff that npm gives me.
 
     Upon review, I don't really use this anymore. Hmm!
 
     #+BEGIN_SRC sh :tangle ../home/.zshrc
-      export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
+      export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
       export PATH=$PATH:/usr/local/share/npm/bin
     #+END_SRC
 

@@ -97,7 +97,7 @@ then
   export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home
 fi
 
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 export PATH=$PATH:/usr/local/share/npm/bin
 
 if [ -d "$HOME/.homesick/repos/homeshick" ];
