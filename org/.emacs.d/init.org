@@ -508,6 +508,57 @@
       (global-set-key (kbd "C-M--") 'er/contract-region)
     #+END_SRC
 
+*** Evaluating Buffers
+
+    This comes from [[https://github.com/jimweirich/emacs-setup-esk/blob/master/eval-buffer.el][Jim Weirich]]. :(.
+
+    #+BEGIN_SRC emacs-lisp
+      (defconst jedcn-eval-buffer-commands
+        '(("js" . "/opt/boxen/nodenv/shims/node")
+          ("rb" . "/opt/boxen/rbenv/shims/ruby")
+          ("py" . "/opt/boxen/pyenv/shims/python")))
+
+      (defconst jedcn-eval-buffer-name "*EVALBUFFER*")
+
+      (defun jedcn-eval-buffer ()
+        "Evaluate the current buffer and display the result in a buffer."
+        (interactive)
+        (save-buffer)
+        (let* ((file-name (buffer-file-name (current-buffer)))
+               (file-extension (file-name-extension file-name))
+               (buffer-eval-command-pair (assoc file-extension jedcn-eval-buffer-commands)))
+          (if buffer-eval-command-pair
+              (let ((command (concat (cdr buffer-eval-command-pair) " " file-name)))
+                (shell-command-on-region (point-min) (point-max) command jedcn-eval-buffer-name nil)
+                (pop-to-buffer jedcn-eval-buffer-name)
+                (other-window 1)
+                (jedcn-eval-buffer-pretty-up-errors jedcn-eval-buffer-name)
+                (message ".."))
+            (message "Unknown buffer type"))))
+
+      (defun jedcn-eval-buffer-pretty-up-errors (buffer)
+        "Fix up the buffer to highlight the error message (if it contains one)."
+        (save-excursion
+          (set-buffer buffer)
+          (goto-char (point-min))
+          (let ((pos (search-forward-regexp "\\.rb:[0-9]+:\\(in.+:\\)? +" (point-max) t)))
+            (if pos (progn
+                      (goto-char pos)
+                      (insert-string "\n\n")
+                      (end-of-line)
+                      (insert-string "\n"))))))
+
+      (defun jedcn-clear-eval-buffer ()
+        (interactive)
+        (save-excursion
+          (set-buffer jedcn-eval-buffer-name)
+          (kill-region (point-min) (point-max))))
+
+      (defun jedcn-eval-or-clear-buffer (n)
+        (interactive "P")
+        (cond ((null n) (jedcn-eval-buffer))
+              (t (jedcn-clear-eval-buffer))))
+    #+END_SRC
 ** Server
 
    Setup an emacs server on start.

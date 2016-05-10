@@ -226,18 +226,50 @@
 (global-set-key (kbd "C-M-+") 'er/expand-region)
 (global-set-key (kbd "C-M--") 'er/contract-region)
 
+(defconst jedcn-eval-buffer-commands
+  '(("js" . "/opt/boxen/nodenv/shims/node")
+    ("rb" . "/opt/boxen/rbenv/shims/ruby")
+    ("py" . "/opt/boxen/pyenv/shims/python")))
+
+(defconst jedcn-eval-buffer-name "*EVALBUFFER*")
+
+(defun jedcn-eval-buffer ()
+  "Evaluate the current buffer and display the result in a buffer."
+  (interactive)
+  (save-buffer)
+  (let* ((file-name (buffer-file-name (current-buffer)))
+         (file-extension (file-name-extension file-name))
+         (buffer-eval-command-pair (assoc file-extension jedcn-eval-buffer-commands)))
+    (if buffer-eval-command-pair
+        (let ((command (concat (cdr buffer-eval-command-pair) " " file-name)))
+          (shell-command-on-region (point-min) (point-max) command jedcn-eval-buffer-name nil)
+          (pop-to-buffer jedcn-eval-buffer-name)
+          (other-window 1)
+          (jedcn-eval-buffer-pretty-up-errors jedcn-eval-buffer-name)
+          (message ".."))
+      (message "Unknown buffer type"))))
+
+(defun jedcn-eval-buffer-pretty-up-errors (buffer)
+  "Fix up the buffer to highlight the error message (if it contains one)."
+  (save-excursion
+    (set-buffer buffer)
+    (goto-char (point-min))
+    (let ((pos (search-forward-regexp "\\.rb:[0-9]+:\\(in.+:\\)? +" (point-max) t)))
+      (if pos (progn
+                (goto-char pos)
+                (insert-string "\n\n")
+                (end-of-line)
+                (insert-string "\n"))))))
+
+(defun jedcn-clear-eval-buffer ()
+  (interactive)
+  (save-excursion
+    (set-buffer jedcn-eval-buffer-name)
+    (kill-region (point-min) (point-max))))
+
+(defun jedcn-eval-or-clear-buffer (n)
+  (interactive "P")
+  (cond ((null n) (jedcn-eval-buffer))
+        (t (jedcn-clear-eval-buffer))))
+
 (server-start)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("c4465c56ee0cac519dd6ab6249c7fd5bb2c7f7f78ba2875d28a50d3c20a59473" default))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
