@@ -354,6 +354,17 @@
       export PATH=$PATH:/usr/local/share/npm/bin
     #+END_SRC
 
+*** z
+
+    [[https://github.com/rupa/z][jump around!]]
+
+    #+BEGIN_SRC sh :tangle ../home/.zshrc
+      if [ -f "/opt/boxen/homebrew/etc/profile.d/z.sh" ];
+      then
+        source /opt/boxen/homebrew/etc/profile.d/z.sh
+      fi
+    #+END_SRC
+
 *** homeshick
 
     I often use [[https://github.com/andsens/homeshick][homeshick]] to manage my dot files. From the homeshick

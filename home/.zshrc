@@ -100,6 +100,11 @@ fi
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 export PATH=$PATH:/usr/local/share/npm/bin
 
+if [ -f "/opt/boxen/homebrew/etc/profile.d/z.sh" ];
+then
+  source /opt/boxen/homebrew/etc/profile.d/z.sh
+fi
+
 if [ -d "$HOME/.homesick/repos/homeshick" ];
 then
   source "$HOME/.homesick/repos/homeshick/homeshick.sh"
