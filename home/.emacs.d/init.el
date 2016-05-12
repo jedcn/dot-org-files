@@ -227,7 +227,8 @@
 (defconst jedcn-eval-buffer-commands
   '(("js" . "/opt/boxen/nodenv/shims/node")
     ("rb" . "/opt/boxen/rbenv/shims/ruby")
-    ("py" . "/opt/boxen/pyenv/shims/python")))
+    ("py" . "/opt/boxen/pyenv/shims/python")
+    ("php" . "/usr/bin/php")))
 
 (defconst jedcn-eval-buffer-name "*EVALBUFFER*")
 
