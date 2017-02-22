@@ -313,7 +313,7 @@
 *** Theme
 
     #+BEGIN_SRC emacs-lisp
-      (require 'leuven-theme)
+      (load-theme 'sanityinc-tomorrow-night t)
     #+END_SRC
 
 *** Font

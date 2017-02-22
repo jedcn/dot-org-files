@@ -8,7 +8,7 @@
 (depends-on "flycheck")
 (depends-on "helm")
 (depends-on "helm-projectile")
-(depends-on "leuven-theme")
+(depends-on "color-theme-sanityinc-tomorrow")
 (depends-on "magit")
 (depends-on "markdown-mode")
 (depends-on "org-bullets")

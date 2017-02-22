@@ -137,7 +137,7 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-(require 'leuven-theme)
+(load-theme 'sanityinc-tomorrow-night t)
 
 (if window-system
     (set-face-attribute 'default nil :font "Menlo-18"))
