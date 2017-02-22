@@ -88,6 +88,11 @@
   (setq web-mode-code-indent-offset 2))
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
+(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+
+(setq web-mode-content-types-alist
+      '(("jsx" . "\\.js[x]?\\'")))
+
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 (add-hook 'after-init-hook 'global-company-mode)
