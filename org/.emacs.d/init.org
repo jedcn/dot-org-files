@@ -11,6 +11,19 @@
   This file is translated into =init.el= when you run the command
   =make=. Both this file and the generated file are committed.
 
+* Generated Content
+
+  This appeared when I upgraded to Emacs 25.5.
+
+  #+BEGIN_SRC emacs-lisp
+
+    ;; Added by Package.el.  This must come before configurations of
+    ;; installed packages.  Don't delete this line.  If you don't want it,
+    ;; just comment it out by adding a semicolon to the start of the line.
+    ;; You may delete these explanatory comments.
+    (package-initialize)
+  #+END_SRC
+
 * System Integration
 
   Whenever emacs needs to run an external command as part of a
